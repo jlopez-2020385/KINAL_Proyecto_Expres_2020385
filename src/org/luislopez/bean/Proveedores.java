@@ -97,8 +97,10 @@ public class Proveedores {
     
     
     
-    
-    
+    @Override
+    public String toString() {
+        return getCodigoProveedor()+ " | " + getNombresProveedor();
+    }    
     
     
     

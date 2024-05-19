@@ -39,12 +39,11 @@ public class TipoProductos {
     public void setDescripcionProducto(String descripcionProducto) {
         this.descripcionProducto = descripcionProducto;
     }
-
-
-   
-   
-   
-   
     
+    @Override
+    public String toString() {
+        return getCodigoTipoProducto() + " | " + getDescripcionProducto() ;
+    }   
+       
     
 }

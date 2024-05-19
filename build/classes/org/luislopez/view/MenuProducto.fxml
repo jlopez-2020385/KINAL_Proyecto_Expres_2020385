@@ -10,25 +10,23 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="622.0" prefWidth="1121.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="org.luislopez.controller.MenuProductoController">
+<AnchorPane id="AnchorPane" prefHeight="622.0" prefWidth="1121.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.luislopez.controller.MenuProductoController">
    <children>
       <ImageView fitHeight="637.0" fitWidth="1121.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../imagenes/Fondo3.png" />
          </image>
       </ImageView>
-      <TableView fx:id="tvProductos" layoutX="12.0" layoutY="157.0" onMouseClicked="#seleccionarElemento" prefHeight="304.0" prefWidth="1098.0" stylesheets="@../resource/KinalExpressCSS.css">
+      <TableView fx:id="tblProductos" layoutX="12.0" layoutY="157.0" onMouseClicked="#selecionarElementos" prefHeight="304.0" prefWidth="1098.0" stylesheets="@../resource/KinalExpressCSS.css">
          <columns>
-            <TableColumn fx:id="colCodProd" minWidth="50.0" prefWidth="102.0" text="codigoProducto" />
-            <TableColumn fx:id="colDescProd" minWidth="121.0" prefWidth="136.0" text="descripcionProducto" />
-            <TableColumn fx:id="colPrecioU" minWidth="128.0" prefWidth="128.0" text="precioUnitario" />
-            <TableColumn fx:id="colPrecioD" minWidth="0.0" prefWidth="111.0" text="precioDocena" />
-            <TableColumn fx:id="colPrecioM" minWidth="90.0" prefWidth="118.0" text="precioMayor" />
-            <TableColumn fx:id="colImagenP" prefWidth="149.0" text="imagenProducto" />
-            <TableColumn fx:id="colExistencia" prefWidth="131.0" text="existencia" />
-            <TableColumn fx:id="colCodTipoProd" prefWidth="110.0" text="CodigoTipoProducto" />
-            <TableColumn fx:id="colCodProv" prefWidth="112.0" text="codigoProveedor" />
+            <TableColumn fx:id="colCodProd" minWidth="50.0" prefWidth="121.0" text="codigoProducto" />
+            <TableColumn fx:id="colDescProd" minWidth="117.0" prefWidth="153.0" text="descripcionProducto" />
+            <TableColumn fx:id="colPrecioU" minWidth="92.0" prefWidth="123.0" text="precioUnitario" />
+            <TableColumn fx:id="colPrecioD" minWidth="0.0" prefWidth="119.0" text="precioDocena" />
+            <TableColumn fx:id="colPrecioM" minWidth="79.0" prefWidth="124.0" text="precioMayor" />
+            <TableColumn fx:id="colExistencia" prefWidth="121.0" text="existencia" />
+            <TableColumn fx:id="colCodTipoProd" prefWidth="168.0" text="CodigoTipoProducto" />
+            <TableColumn fx:id="colCodProv" prefWidth="169.0" text="codigoProveedor" />
          </columns>
          <styleClass>
             <String fx:value="filler" />
@@ -42,8 +40,8 @@
       <TextField fx:id="txtPrecioD" layoutX="400.0" layoutY="120.0" prefHeight="25.0" prefWidth="186.0" />
       <TextField fx:id="txtPrecioM" layoutX="745.0" layoutY="14.0" prefHeight="25.0" prefWidth="186.0" />
       <TextField fx:id="txtExistencia" layoutX="745.0" layoutY="50.0" prefHeight="25.0" prefWidth="186.0" />
-      <ComboBox fx:id="cmbCodgioTipoP" layoutX="742.0" layoutY="85.0" prefHeight="25.0" prefWidth="186.0" />
-      <ComboBox fx:id="cmbCodigoP" layoutX="742.0" layoutY="120.0" prefHeight="25.0" prefWidth="186.0" />
+      <ComboBox fx:id="cmbCodigoTipoP" layoutX="742.0" layoutY="85.0" prefHeight="25.0" prefWidth="186.0" />
+      <ComboBox fx:id="cmbCodProv" layoutX="742.0" layoutY="120.0" prefHeight="25.0" prefWidth="186.0" />
       <Button fx:id="btnAgregar" layoutX="195.0" layoutY="478.0" mnemonicParsing="false" onAction="#agregar" prefHeight="76.0" prefWidth="170.0" stylesheets="@../resource/KinalExpressCSS.css" text="Agregar" textAlignment="RIGHT">
          <graphic>
             <ImageView fx:id="imagAgregar" fitHeight="100.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
@@ -83,7 +81,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="btnReporte" layoutX="655.0" layoutY="480.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="170.0" stylesheets="@../resource/KinalExpressCSS.css" text="Reportes">
+      <Button fx:id="btnReporte" layoutX="655.0" layoutY="480.0" mnemonicParsing="false" onAction="#reportes" prefHeight="110.0" prefWidth="170.0" stylesheets="@../resource/KinalExpressCSS.css" text="Reportes">
          <styleClass>
             <String fx:value="button1" />
             <String fx:value="button2" />

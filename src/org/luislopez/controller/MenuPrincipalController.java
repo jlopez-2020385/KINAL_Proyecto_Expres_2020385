@@ -60,7 +60,7 @@ public class MenuPrincipalController  implements Initializable{
         }if(event.getSource() == btnFecha){
             escenarioPrincipal.datePickerView();        
         }if(event.getSource() == btnProducto)
-            escenarioPrincipal.menuProductoView();         
+            escenarioPrincipal.menuProductoView();
         
         
     }

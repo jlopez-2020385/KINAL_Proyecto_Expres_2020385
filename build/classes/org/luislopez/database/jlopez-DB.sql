@@ -21,7 +21,7 @@ create table Clientes(
 
 create table TipoProducto(
 	codigoTipoProducto int auto_increment,
-    descripcion varchar (100),
+    descripcionProducto varchar (100),
     primary key PK_TipoProducto(codigoTipoProducto)
 );
 
@@ -51,12 +51,24 @@ create table Proveedores(
     paginaWeb varchar (50),
     primary key PK_codigoProveedor (codigoProveedor)
 
-
 );
 
 
 
-
+create table Productos(
+	codigoProducto varchar(15),
+	descripcionProducto varchar(15),
+	precioUnitario decimal(10,2),
+	precioDocena decimal(10,2),
+	precioMayor decimal(10,2),
+	imagenProducto varchar(45),
+	existencia int,
+	codigoTipoProducto int,
+	codigoProveedor int,
+	primary key  PK_codigoProducto (codigoProducto),
+	foreign key (codigoTipoProducto) references TipoProducto(codigoTipoProducto),
+	foreign key (codigoProveedor) references Proveedores(codigoProveedor)
+);
 
 
 -- ------------------------------------------------------------------------------- Clientes --------------------------------------------------------------------------------------------------------
@@ -161,7 +173,7 @@ call sp_BuscarClientes(1);
 delimiter $$
 create procedure sp_AgregarTipoProducto (in cripcion varchar (100))
 begin 
-	insert into TipoProducto (TipoProducto.descripcion)
+	insert into TipoProducto (TipoProducto.descripcionProducto)
 		values (cripcion);
 end $$        
 delimiter ;
@@ -197,7 +209,7 @@ create procedure sp_ActualizarTipoProducto(in digoTipoProducto int,in cripcion v
 begin
     update TipoProducto
     set 
-        TipoProducto.descripcion= cripcion
+        TipoProducto.descripcionProducto= cripcion
         where
         TipoProducto.codigoTipoProducto = digoTipoProducto;
 end$$
@@ -212,7 +224,7 @@ create procedure sp_MostrarTipoProducto ()
 begin 
 	select
     t.codigoTipoProducto,
-    t.descripcion
+    t.descripcionProducto
     from TipoProducto t;
 end $$        
 delimiter ;
@@ -480,3 +492,100 @@ call sp_BuscarCargoEmpleado(1);
 
 
 
+
+
+
+-- ------------------------------------------------------------------------------- Producto --------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+ -- -------------------------- Productos  Procedimiento Almacenados -----------------------------
+ -- CRUD PRODUCTOS
+ -- ---------------------------Agregar Producto-----------------------------
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_agregarProducto(
+    IN p_codigoProducto VARCHAR(15),
+    IN p_descripcionProducto VARCHAR(15),
+    IN p_precioUnitario DECIMAL(10,2),
+    IN p_precioDocena DECIMAL(10,2),
+    IN p_precioMayor DECIMAL(10,2),
+    IN p_existencia INT,
+    IN p_codigoTipoProducto INT,
+    IN p_codigoProveedor INT
+)
+BEGIN
+    INSERT INTO Productos(codigoProducto, descripcionProducto, precioUnitario, precioDocena, precioMayor, existencia, codigoTipoProducto, codigoProveedor)
+    VALUES(p_codigoProducto, p_descripcionProducto, p_precioUnitario, p_precioDocena, p_precioMayor, p_existencia, p_codigoTipoProducto, p_codigoProveedor);
+END$$
+DELIMITER ;
+
+CALL sp_agregarProducto('P001', 'Arroz', 5.99, 68.99, 129.99, 100, 2, 2);
+CALL sp_agregarProducto('P002', 'Frijoles', 3.49, 39.99, 74.99, 150, 2, 2);
+CALL sp_agregarProducto('P003', 'Aceite', 8.99, 102.99, 194.99,  80, 3, 2);
+CALL sp_agregarProducto('P004', 'Leche Entera', 2.99, 32.99, 62.99, 120, 3, 4);
+CALL sp_agregarProducto('P005', 'Azúcar', 4.49, 51.99, 98.99, 90, 4, 3);
+
+-- -----------------------Listar Productos--------------------------------
+
+Delimiter $$
+create procedure sp_mostrarProductos()
+	begin
+    select
+		p.codigoProducto,
+        p.descripcionProducto,
+        p.precioUnitario,
+        p.precioDocena,
+        p.precioMayor,
+        p.existencia,
+        p.codigoTipoProducto,
+        p.codigoProveedor
+        from
+        productos p;
+	end$$
+Delimiter ;
+
+call sp_mostrarProductos();
+
+-- ----------------------------Editar Producto------------------------------------
+
+DELIMITER $$
+CREATE PROCEDURE sp_actualizarProducto(
+    IN p_codigoProducto VARCHAR(15),
+    IN p_nuevaDescripcionProducto VARCHAR(15),
+    IN p_nuevoPrecioUnitario DECIMAL(10,2),
+    IN p_nuevoPrecioDocena DECIMAL(10,2),
+    IN p_nuevoPrecioMayor DECIMAL(10,2),
+    IN p_nuevaExistencia INT,
+    IN p_nuevoCodigoTipoProducto INT,
+    IN p_nuevoCodigoProveedor INT
+)
+BEGIN
+    UPDATE Productos
+    SET descripcionProducto = p_nuevaDescripcionProducto,
+        precioUnitario = p_nuevoPrecioUnitario,
+        precioDocena = p_nuevoPrecioDocena,
+        precioMayor = p_nuevoPrecioMayor,
+        existencia = p_nuevaExistencia,
+        codigoTipoProducto = p_nuevoCodigoTipoProducto,
+        codigoProveedor = p_nuevoCodigoProveedor
+    WHERE codigoProducto = p_codigoProducto;
+END$$
+DELIMITER ;
+
+call sp_actualizarProducto('P001', 'Pollo', 8.99, 69.99, 130.99, 100, 2, 2);
+
+-- -----------------------Eliminar Producto------------------------------
+
+Delimiter $$
+CREATE PROCEDURE sp_eliminarProducto(IN _codigoProducto VARCHAR(15))
+BEGIN
+    DELETE FROM Productos
+    WHERE codigoProducto = _codigoProducto;
+END $$
+
+DELIMITER ;
+
+call sp_eliminarProducto('P001');
+-- -----------------------------------
