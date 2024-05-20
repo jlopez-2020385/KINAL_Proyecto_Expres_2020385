@@ -12,21 +12,20 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="626.0" prefWidth="1123.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="org.luislopez.controller.MenuDetalleCompraController">
+<AnchorPane id="AnchorPane" prefHeight="626.0" prefWidth="1123.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.luislopez.controller.MenuDetalleCompraController">
    <children>
       <ImageView fitHeight="640.0" fitWidth="1123.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../imagenes/Fondo3.png" />
          </image>
       </ImageView>
-      <TableView fx:id="tblCompras" layoutX="106.0" layoutY="145.0" onMouseClicked="#selecionarElementos" prefHeight="320.0" prefWidth="984.0" stylesheets="@../resource/KinalExpressCSS.css">
+      <TableView fx:id="tblDetalleCompra" layoutX="106.0" layoutY="145.0" onMouseClicked="#selecionarElementos" prefHeight="320.0" prefWidth="984.0" stylesheets="@../resource/KinalExpressCSS.css">
          <columns>
-            <TableColumn fx:id="colNumeroC" minWidth="50.0" prefWidth="176.0" text="codigoDetalleCompra" />
-            <TableColumn fx:id="colFechaC" minWidth="104.0" prefWidth="203.0" text="costoUnitario" />
-            <TableColumn fx:id="colDescripcionC" minWidth="124.0" prefWidth="209.0" text="cantidad" />
-            <TableColumn fx:id="colTotalC" minWidth="0.0" prefWidth="189.0" text="codigoProducto" />
-            <TableColumn prefWidth="207.0" text="numeroDocumento" />
+            <TableColumn fx:id="colCodigoDetalleCompra" minWidth="50.0" prefWidth="176.0" text="codigoDetalleCompra" />
+            <TableColumn fx:id="colCostoUnitario" minWidth="104.0" prefWidth="203.0" text="costoUnitario" />
+            <TableColumn fx:id="colCantidad" minWidth="124.0" prefWidth="209.0" text="cantidad" />
+            <TableColumn fx:id="colCodigoProducto" minWidth="0.0" prefWidth="189.0" text="codigoProducto" />
+            <TableColumn fx:id="colNumeroDocumento" prefWidth="207.0" text="numeroDocumento" />
          </columns>
          <styleClass>
             <String fx:value="filler" />
@@ -34,11 +33,11 @@
             <String fx:value="table-row-cell" />
          </styleClass>
       </TableView>
-      <TextField fx:id="txtCodigoProd" layoutX="406.0" layoutY="14.0" prefHeight="25.0" prefWidth="186.0" />
-      <TextField fx:id="txtCodigoProd1" layoutX="406.0" layoutY="53.0" prefHeight="25.0" prefWidth="186.0" />
-      <TextField fx:id="txtCodigoProd2" layoutX="406.0" layoutY="94.0" prefHeight="25.0" prefWidth="186.0" />
-      <ComboBox fx:id="cmbCodigoTipoP" layoutX="762.0" layoutY="14.0" prefHeight="25.0" prefWidth="186.0" />
-      <ComboBox fx:id="cmbCodigoTipoP1" layoutX="762.0" layoutY="53.0" prefHeight="25.0" prefWidth="186.0" />
+      <TextField fx:id="txtCodigoDetalleCompra" layoutX="406.0" layoutY="14.0" prefHeight="25.0" prefWidth="186.0" />
+      <TextField fx:id="txtCostoUnitario" layoutX="406.0" layoutY="53.0" prefHeight="25.0" prefWidth="186.0" />
+      <TextField fx:id="txtCantidad" layoutX="406.0" layoutY="94.0" prefHeight="25.0" prefWidth="186.0" />
+      <ComboBox fx:id="cmbCodigoProducto" layoutX="762.0" layoutY="14.0" prefHeight="25.0" prefWidth="186.0" />
+      <ComboBox fx:id="cmbNumeroDocumento" layoutX="762.0" layoutY="53.0" prefHeight="25.0" prefWidth="186.0" />
       <Label layoutX="246.0" layoutY="14.0" prefHeight="25.0" prefWidth="160.0" text="ID de DetalleCompra">
          <font>
             <Font size="16.0" />

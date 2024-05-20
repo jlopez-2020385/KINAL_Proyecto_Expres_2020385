@@ -69,7 +69,10 @@ public class MenuCargoEmpleadoController implements Initializable {
         cargarDatos();
         // TODO
     }
-
+    
+    /**
+     * Método para cargar los datos en la tabla de SceneBuilder
+     */
     public void cargarDatos() {
         tblCargoEmpleado.setItems(getCargoEmpleado());
         colCodigoC.setCellValueFactory(new PropertyValueFactory<CargoEmpleado, Integer>("codigoCargoEmpleado"));
@@ -77,7 +80,10 @@ public class MenuCargoEmpleadoController implements Initializable {
         colDescripcionC.setCellValueFactory(new PropertyValueFactory<CargoEmpleado, Integer>("descripcionCargo"));
         
     }
-
+    
+    /**
+     * Método para seleccionar elementos de la tabla SceneBuilder
+     */
     public void selecionarElementos() {
         txtCodigoC.setText(String.valueOf(((CargoEmpleado) tblCargoEmpleado.getSelectionModel().getSelectedItem()).getCodigoCargoEmpleado()));
         txtNombreEmpleadoC.setText((((CargoEmpleado) tblCargoEmpleado.getSelectionModel().getSelectedItem()).getNombreCargo()));
@@ -85,7 +91,12 @@ public class MenuCargoEmpleadoController implements Initializable {
         
 
     }
-
+    
+    
+    /**
+     * Método para obtener la lista
+     * 
+     */
     public ObservableList<CargoEmpleado> getCargoEmpleado() {
         ArrayList<CargoEmpleado> lista = new ArrayList<>();
         try {
@@ -104,7 +115,11 @@ public class MenuCargoEmpleadoController implements Initializable {
 
         return listaCargoEmpleado = FXCollections.observableList(lista);
     }
-
+    
+    /**
+     * Método para agregar 
+     */
+    
     public void agregar() {
         switch (tipoDeoperaciones) {
             case NINGUNO:
@@ -133,6 +148,10 @@ public class MenuCargoEmpleadoController implements Initializable {
         }
     }
 
+    /**
+     * Método para guardar 
+     */    
+    
     public void guardar() {
         CargoEmpleado registro = new CargoEmpleado();
         registro.setNombreCargo(txtNombreEmpleadoC.getText());        
@@ -150,7 +169,11 @@ public class MenuCargoEmpleadoController implements Initializable {
         }
 
     }
-
+    
+    /**
+     * Método para eliminar 
+     */
+    
     public void eliminar() {
         
         switch(tipoDeoperaciones){
@@ -184,6 +207,10 @@ public class MenuCargoEmpleadoController implements Initializable {
         
     }
     
+    /**
+     * Método para editar 
+     */
+    
     public void editar(){
         switch(tipoDeoperaciones){
             case NINGUNO:
@@ -215,6 +242,10 @@ public class MenuCargoEmpleadoController implements Initializable {
         
     }
     
+    /**
+     * Método para actualizar 
+     */
+    
     public void actualizar(){
         try{
             PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_ActualizarCargoEmpleado(?,?,?)}");
@@ -233,6 +264,7 @@ public class MenuCargoEmpleadoController implements Initializable {
         
     }
     
+    
     public void reportes(){
         switch(tipoDeoperaciones){
             case ACTUALIZAR:
@@ -249,7 +281,7 @@ public class MenuCargoEmpleadoController implements Initializable {
         }
     }    
         
-    
+ 
     public void desactivarControles() {
         txtCodigoC.setEditable(true);
         txtNombreEmpleadoC.setEditable(false);
@@ -258,12 +290,15 @@ public class MenuCargoEmpleadoController implements Initializable {
 
     }
 
+
     public void activarControles() {
         txtCodigoC.setEditable(true);
         txtNombreEmpleadoC.setEditable(true);
         txtDescripcionC.setEditable(true);
 
     }
+    
+   
 
     public void limpiarControlers() {
         txtCodigoC.clear();

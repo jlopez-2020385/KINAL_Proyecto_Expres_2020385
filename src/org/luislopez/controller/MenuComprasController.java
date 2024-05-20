@@ -78,8 +78,12 @@ public class MenuComprasController implements Initializable {
         // TODO
     }
 
+    /**
+     * Método para cargar los datos en la tabla de SceneBuilder
+     */  
+    
     public void cargarDatos() {
-        tblCompras.setItems(getClientes());
+        tblCompras.setItems(getCompras());
         colNumeroC.setCellValueFactory(new PropertyValueFactory<Compras, Integer>("numeroDocumento"));
         colFechaC.setCellValueFactory(new PropertyValueFactory<Compras, Integer>("fechaDocumento"));
         colDescripcionC.setCellValueFactory(new PropertyValueFactory<Compras, Integer>("descripcion"));
@@ -87,6 +91,11 @@ public class MenuComprasController implements Initializable {
 
     }
 
+
+    /**
+     * Método para seleccionar elementos de la tabla SceneBuilder
+     */    
+    
     public void selecionarElementos() {
         txtNumeroC.setText(String.valueOf(((Compras) tblCompras.getSelectionModel().getSelectedItem()).getNumeroDocumento()));
         txtFechaC.setText((((Compras) tblCompras.getSelectionModel().getSelectedItem()).getFechaDocumento()));
@@ -94,7 +103,12 @@ public class MenuComprasController implements Initializable {
         txtTotalC.setText((((Compras) tblCompras.getSelectionModel().getSelectedItem()).getTotalDocumento()));
     }
 
-    public ObservableList<Compras> getClientes() {
+    
+    /**
+     * Método para obtener la lista
+     * 
+     */       
+    public ObservableList<Compras> getCompras() {
         ArrayList<Compras> lista = new ArrayList<>();
         try {
             PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_MostrarCompras}");
@@ -113,6 +127,10 @@ public class MenuComprasController implements Initializable {
         return listaCompras = FXCollections.observableList(lista);
     }
 
+    /**
+     * Método para agregar 
+     */      
+    
     public void agregar() {
         switch (tipoDeoperaciones) {
             case NINGUNO:
@@ -141,6 +159,11 @@ public class MenuComprasController implements Initializable {
         }
     }
 
+
+    /**
+     * Método para guardar 
+     */   
+    
     public void guardar() {
         Compras registro = new Compras();
         registro.setFechaDocumento(txtFechaC.getText());
@@ -160,6 +183,9 @@ public class MenuComprasController implements Initializable {
 
     }
 
+    /**
+     * Método para eliminar 
+     */    
     public void eliminar() {
         
         switch(tipoDeoperaciones){
@@ -193,6 +219,11 @@ public class MenuComprasController implements Initializable {
         
     }
     
+    
+    /**
+     * Método para editar 
+     */
+    
     public void editar(){
         switch(tipoDeoperaciones){
             case NINGUNO:
@@ -223,6 +254,10 @@ public class MenuComprasController implements Initializable {
         }
         
     }
+    
+    /**
+     * Método para actualizar 
+     */    
     
     public void actualizar(){
         try{

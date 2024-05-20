@@ -14,9 +14,9 @@ import javafx.scene.control.MenuItem;
 import org.luislopez.system.Principal; 
 
 /**
- *
- * @author HP
+ * La clase MenuPrincipalController controla la vista del menú principal de la aplicación Kinal Express.
  */
+
 public class MenuPrincipalController  implements Initializable{
     private Principal escenarioPrincipal;
     @FXML MenuItem btnMenuClientes;
@@ -29,6 +29,7 @@ public class MenuPrincipalController  implements Initializable{
     @FXML MenuItem btnEmpleado;     
     @FXML MenuItem btnFactura;    
     @FXML MenuItem btnDetalleFactura;    
+    @FXML MenuItem btnDetalleCompra;    
     @FXML MenuItem btnFecha;    
     
     
@@ -68,8 +69,11 @@ public class MenuPrincipalController  implements Initializable{
             escenarioPrincipal.menuEmpleadoView();
         }if(event.getSource() == btnFactura){
             escenarioPrincipal.menuFacturaView();   
-        }if(event.getSource() == btnDetalleFactura)
+        }if(event.getSource() == btnDetalleFactura){
             escenarioPrincipal.menuDetalleFacturaView();         
+        }if(event.getSource() == btnDetalleCompra)
+            escenarioPrincipal.menuDetalleCompraView();          
+        
         
     }
     

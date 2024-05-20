@@ -1,3 +1,4 @@
+-- José Luis Emanuel López Laynes
 drop database if exists DBKinalExpessIN5BM;
 
 create database DBKinalExpessIN5BM;
@@ -111,6 +112,50 @@ CREATE TABLE DetalleFactura(
 	foreign key (numeroDeFactura) REFERENCES Factura(numeroDeFactura),
 	foreign key (codigoProducto) REFERENCES Productos(codigoProducto)
 );
+
+
+-- Triggers que eliminan registros relacionados antes de borrar registros principales.
+
+Delimiter $$
+	create trigger tr_EliminarProductos
+	before delete on Productos
+	for each row
+	begin
+    
+		DELETE FROM DetalleFactura WHERE codigoProducto = OLD.codigoProducto;
+		DELETE FROM DetalleCompra WHERE codigoProducto = OLD.codigoProducto;
+	end$$
+
+	create trigger tr_EliminarFactura
+	before delete on Factura
+	for each row
+	begin
+		DELETE FROM DetalleFactura WHERE numeroDeFactura = OLD.numeroDeFactura;
+	end$$
+
+	create trigger tr_EliminarEmpleado
+	before delete on Empleados
+	for each row
+	begin
+		DELETE FROM Factura WHERE codigoEmpleado = OLD.codigoEmpleado;
+	end$$
+
+	create trigger tr_EliminarCompras
+	before delete on Compras
+	for each row
+	begin
+		DELETE FROM DetalleCompra WHERE numeroDocumento = OLD.numeroDocumento;
+	end$$
+
+	create trigger tr_EliminarCargoEmpleado
+	before delete on CargoEmpleado
+	for each row
+	begin
+		DELETE FROM Empleados WHERE codigoCargoEmpleado = OLD.codigoCargoEmpleado;
+	end$$
+Delimiter ;
+
+
 
 -- ------------------------------------------------------------------------------- Clientes --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -435,7 +480,7 @@ end$$
 delimiter ;
 call sp_BuscarCompras(1);
 
--- ------------------------------------------------------------------------------- Empleado --------------------------------------------------------------------------------------------------------
+-- ------------------------------------------------------------------------------- Cargo de Empleado --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 -- ------------------------------------------------------------------------------- AGREGAR --------------------------------------------------------------------------------------------------------
@@ -641,7 +686,7 @@ begin
     where DetalleCompra.codigoDetalleCompra = odigoDetalleCompra;
 end$$
 delimiter ;
-call sp_EliminarCargoEmpleado ('10');
+call sp_EliminarDetalleCompra ('10');
 -- ------------------------------------------------------------------------------- EDITAR --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 delimiter $$

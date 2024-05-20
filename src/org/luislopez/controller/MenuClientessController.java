@@ -92,6 +92,9 @@ public class MenuClientessController implements Initializable {
         // TODO
     }
 
+    /**
+     * Método para cargar los datos en la tabla de SceneBuilder
+     */    
     public void cargarDatos() {
         tblClientes.setItems(getClientes());
         colCodigoC.setCellValueFactory(new PropertyValueFactory<Clientes, Integer>("clienteID"));
@@ -104,6 +107,10 @@ public class MenuClientessController implements Initializable {
 
     }
 
+    /**
+     * Método para seleccionar elementos de la tabla SceneBuilder
+     */    
+    
     public void selecionarElementos() {
         txtCodigoC.setText(String.valueOf(((Clientes) tblClientes.getSelectionModel().getSelectedItem()).getClienteID()));
         txtNombreC.setText((((Clientes) tblClientes.getSelectionModel().getSelectedItem()).getNombreClientes()));
@@ -114,6 +121,10 @@ public class MenuClientessController implements Initializable {
         txtCorreoC.setText((((Clientes) tblClientes.getSelectionModel().getSelectedItem()).getCorreoClientes()));
     }
 
+    /**
+     * Método para obtener la lista
+     * 
+     */    
     public ObservableList<Clientes> getClientes() {
         ArrayList<Clientes> lista = new ArrayList<>();
         try {
@@ -136,6 +147,9 @@ public class MenuClientessController implements Initializable {
         return listaClientes = FXCollections.observableList(lista);
     }
 
+    /**
+     * Método para agregar 
+     */    
     public void agregar() {
         switch (tipoDeoperaciones) {
             case NINGUNO:
@@ -163,7 +177,12 @@ public class MenuClientessController implements Initializable {
                 
         }
     }
+    
 
+    /**
+     * Método para guardar 
+     */   
+    
     public void guardar() {
         Clientes registro = new Clientes();
         registro.setNombreClientes(txtNombreC.getText());
@@ -189,6 +208,10 @@ public class MenuClientessController implements Initializable {
 
     }
 
+    /**
+     * Método para eliminar 
+     */
+    
     public void eliminar() {
         
         switch(tipoDeoperaciones){
@@ -224,6 +247,11 @@ public class MenuClientessController implements Initializable {
         
     }
     
+    /**
+     * Método para editar 
+     */
+        
+    
     public void editar(){
         switch(tipoDeoperaciones){
             case NINGUNO:
@@ -255,6 +283,10 @@ public class MenuClientessController implements Initializable {
         
     }
     
+    /**
+     * Método para actualizar 
+     */
+        
     public void actualizar(){
         try{
             PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_ActualizarClientes(?,?,?,?,?,?,?)}");
@@ -297,7 +329,6 @@ public class MenuClientessController implements Initializable {
                 break;  
         }
     }    
-           
     
     public void desactivarControles() {
         txtCodigoC.setEditable(true);

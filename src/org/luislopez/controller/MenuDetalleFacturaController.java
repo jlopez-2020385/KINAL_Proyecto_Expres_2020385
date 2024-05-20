@@ -284,9 +284,9 @@ public class MenuDetalleFacturaController implements Initializable {
                     if(respuesta == JOptionPane.YES_NO_OPTION){
                         try{
                             PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_BuscarDetalleFactura(?)}");
-                            procedimiento.setInt(1, ((DetalleFactura)tblDetalleFactura.getSelectionModel().getSelectedItem()).getNumeroDeFactura());
+                            procedimiento.setInt(1, ((DetalleFactura)tblDetalleFactura.getSelectionModel().getSelectedItem()).getCodigoDetalleFactura());
                             procedimiento.execute();
-                            listaFactura.remove(tblDetalleFactura.getSelectionModel().getSelectedItem());
+                            listaDetalleFactura.remove(tblDetalleFactura.getSelectionModel().getSelectedItem());
                             limpiarControles();
                         }catch(Exception e){
                             e.printStackTrace();

@@ -15,6 +15,7 @@ import org.luislopez.controller.DatePickerController;
 import org.luislopez.controller.MenuCargoEmpleadoController;
 import org.luislopez.controller.MenuClientessController;
 import org.luislopez.controller.MenuComprasController;
+import org.luislopez.controller.MenuDetalleCompraController;
 import org.luislopez.controller.MenuDetalleFacturaController;
 import org.luislopez.controller.MenuEmpleadoController;
 import org.luislopez.controller.MenuFacturaController;
@@ -26,11 +27,10 @@ import org.luislopez.controller.MenuProveedorController;
 import org.luislopez.controller.ProgramadoController;
 
 /**
- *Documentacion
- *carnet 2020385
- * IN5BM
- * fecha de Creacion : 10/04/2024
+ * La clase Principal es la clase principal de la aplicación Kinal Express.
+ * Se encarga de manejar la navegación entre las diferentes vistas.
  */
+
 public class Principal extends Application {
     private Stage escenarioPrincipal;
     private Scene escena;
@@ -71,6 +71,7 @@ public class Principal extends Application {
         
     }
     
+    
     public void menuPrincipalView(){
         try{
             MenuPrincipalController menuPrincipalView=(MenuPrincipalController)cambiarEscena("KINALexpres.fxml",1120,620);
@@ -90,6 +91,7 @@ public class Principal extends Application {
         }
     }
     
+    
     public void menuTipoProductoView(){
         try{
             MenuTipoProductoController menuTipoProductoController=(MenuTipoProductoController)cambiarEscena("MenuTipoProducto.fxml",1120,620);
@@ -99,6 +101,7 @@ public class Principal extends Application {
         }
     }  
 
+    
     public void menuProveedorView(){
         try{
             MenuProveedorController menuProveedorController=(MenuProveedorController)cambiarEscena("MenuProveedor.fxml",1120,620);
@@ -136,6 +139,7 @@ public class Principal extends Application {
         }
     }       
     
+    
     public void menuFacturaView(){
         try{
             MenuFacturaController menuFacturaController=(MenuFacturaController)cambiarEscena("MenuFactura.fxml",1120,620);
@@ -144,6 +148,7 @@ public class Principal extends Application {
             System.out.println(e.getMessage()); 
         }
     }        
+    
     
     public void menuDetalleFacturaView(){
         try{
@@ -154,6 +159,17 @@ public class Principal extends Application {
         }
     }       
     
+    
+    public void menuDetalleCompraView(){
+        try{
+            MenuDetalleCompraController menuDetalleCompraController=(MenuDetalleCompraController)cambiarEscena("MenuDetalleCompra.fxml",1120,620);
+            menuDetalleCompraController.setEscenarioPrincipal(this);
+        }catch(Exception e){
+            System.out.println(e.getMessage()); 
+        }
+    } 
+
+    
     public void menuEmpleadoView(){
         try{
             MenuEmpleadoController menuEmpleadoController=(MenuEmpleadoController)cambiarEscena("MenuEmpleado.fxml",1120,620);
@@ -162,9 +178,7 @@ public class Principal extends Application {
             System.out.println(e.getMessage()); 
         }
     }       
-        
-    
-    
+
     
     public void datePickerView(){
         try{
