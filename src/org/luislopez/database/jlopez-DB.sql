@@ -50,16 +50,14 @@ create table Proveedores(
     contactoPrincipal varchar (100),
     paginaWeb varchar (50),
     primary key PK_codigoProveedor (codigoProveedor)
-
 );
 
 create table Productos(
-	codigoProducto varchar(15),
+	codigoProducto int auto_increment,
 	descripcionProducto varchar(15),
 	precioUnitario decimal(10,2),
 	precioDocena decimal(10,2),
 	precioMayor decimal(10,2),
-	imagenProducto varchar(45),
 	existencia int,
 	codigoTipoProducto int,
 	codigoProveedor int,
@@ -72,14 +70,12 @@ create table DetalleCompra(
 	codigoDetalleCompra int auto_increment,
 	costoUnitario decimal(10,2),
 	cantidad int,
-	codigoProducto varchar(15),
+	codigoProducto int,
 	numeroDocumento int,
 	primary key PK_codigoDetalleCompra (codigoDetalleCompra),
 	foreign key (codigoProducto) REFERENCES Productos(codigoProducto),
 	foreign key (numeroDocumento) REFERENCES Compras(numeroDocumento)
-    
 );
-
 
 create table Empleados(
 	codigoEmpleado int auto_increment,
@@ -91,9 +87,7 @@ create table Empleados(
 	codigoCargoEmpleado int,
 	primary key PK_codigoEmpleado (codigoEmpleado),
 	foreign key (codigoCargoEmpleado) REFERENCES CargoEmpleado(codigoCargoEmpleado)
-
 );
-
 
 create table Factura(
 	numeroDeFactura int auto_increment,
@@ -105,7 +99,6 @@ create table Factura(
 	primary key PK_numeroDeFactura (numeroDeFactura),
 	foreign key (clienteID) REFERENCES Clientes(clienteID),
 	foreign key (codigoEmpleado) REFERENCES Empleados(codigoEmpleado)
-
 );
 
 CREATE TABLE DetalleFactura(
@@ -113,13 +106,11 @@ CREATE TABLE DetalleFactura(
 	precioUnitario decimal(10,2),
 	cantidad int,
 	numeroDeFactura int,
-	codigoProducto varchar(15),
+	codigoProducto int,
 	primary key PK_codigoDetalleFactura (codigoDetalleFactura),
 	foreign key (numeroDeFactura) REFERENCES Factura(numeroDeFactura),
 	foreign key (codigoProducto) REFERENCES Productos(codigoProducto)
 );
-
-
 
 -- ------------------------------------------------------------------------------- Clientes --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -207,14 +198,6 @@ end$$
 delimiter ;
  call sp_BuscarClientes(1);
 
-
-
-
-
-
-
-
-
 -- ------------------------------------------------------------------------------- TipoProducto --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -288,14 +271,6 @@ begin
 end$$ 
 delimiter ;
 call sp_BuscarTipoProducto(1);
-
-
-
-
-
-
-
-
 
 -- ------------------------------------------------------------------------------- Proveedores --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -382,11 +357,6 @@ end$$
 delimiter ;
 call sp_BuscarProveedores(1);
 
-
-
-
-
-
 -- ------------------------------------------------------------------------------- compras --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -465,12 +435,6 @@ end$$
 delimiter ;
 call sp_BuscarCompras(1);
 
-
-
-
-
-
-
 -- ------------------------------------------------------------------------------- Empleado --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -546,8 +510,6 @@ end$$
 delimiter ;
 call sp_BuscarCargoEmpleado(1);
 
-
-
 -- ------------------------------------------------------------------------------- Producto --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -556,26 +518,24 @@ call sp_BuscarCargoEmpleado(1);
 
 DELIMITER $$
 
-create procedure sp_agregarProducto( in odigoProducto varchar(15),in escripcionProducto varchar(15),in recioUnitario decimal(10,2),in recioDocena decimal(10,2),in recioMayor decimal(10,2),in xistencia int,in odigoTipoProducto int,in odigoProveedor int)
+create procedure sp_agregarProducto(in escripcionProducto varchar(15),in recioUnitario decimal(10,2),in recioDocena decimal(10,2),in recioMayor decimal(10,2),in xistencia int,in odigoTipoProducto int,in odigoProveedor int)
 begin
-    INSERT INTO Productos(codigoProducto, descripcionProducto, precioUnitario, precioDocena, precioMayor, existencia, codigoTipoProducto, codigoProveedor)
-    VALUES(odigoProducto, escripcionProducto, recioUnitario, recioDocena, recioMayor, xistencia, odigoTipoProducto, odigoProveedor);
+    INSERT INTO Productos( descripcionProducto, precioUnitario, precioDocena, precioMayor, existencia, codigoTipoProducto, codigoProveedor)
+    VALUES(escripcionProducto, recioUnitario, recioDocena, recioMayor, xistencia, odigoTipoProducto, odigoProveedor);
 end$$
 DELIMITER ;
 
-CALL sp_agregarProducto('P001', 'Arroz', 5.99, 68.99, 129.99, 100, 1, 1);
-CALL sp_agregarProducto('P002', 'Frijoles', 3.49, 39.99, 74.99, 150, 2, 2);
-CALL sp_agregarProducto('P003', 'Aceite', 8.99, 102.99, 194.99,  80, 3, 3);
-CALL sp_agregarProducto('P004', 'Leche Entera', 2.99, 32.99, 62.99, 120, 4, 4);
-CALL sp_agregarProducto('P005', 'Azúcar', 4.49, 51.99, 98.99, 90, 5, 5);
-CALL sp_agregarProducto('P006', 'Harina', 3.99, 45.99, 89.99, 80, 6, 6);
-CALL sp_agregarProducto('P007', 'Leche', 1.99, 20.99, 39.99, 100, 7, 7);
-CALL sp_agregarProducto('P008', 'Arroz', 2.99, 35.99, 67.99, 120, 8, 8);
-CALL sp_agregarProducto('P009', 'Frijoles', 3.49, 40.99, 78.99, 110, 9, 9);
-CALL sp_agregarProducto('P010', 'Aceite', 4.99, 55.99, 108.99, 60, 10, 10);
-CALL sp_agregarProducto('P011', 'Sal', 0.99, 10.99, 19.99, 200, 2, 3);
-
-
+CALL sp_agregarProducto( 'Arroz', 5.99, 68.99, 129.99, 100, 1, 1);
+CALL sp_agregarProducto( 'Frijoles', 3.49, 39.99, 74.99, 150, 2, 2);
+CALL sp_agregarProducto( 'Aceite', 8.99, 102.99, 194.99,  80, 3, 3);
+CALL sp_agregarProducto( 'Leche Entera', 2.99, 32.99, 62.99, 120, 4, 4);
+CALL sp_agregarProducto( 'Azúcar', 4.49, 51.99, 98.99, 90, 5, 5);
+CALL sp_agregarProducto( 'Harina', 3.99, 45.99, 89.99, 80, 6, 6);
+CALL sp_agregarProducto( 'Leche', 1.99, 20.99, 39.99, 100, 7, 7);
+CALL sp_agregarProducto( 'Arroz', 2.99, 35.99, 67.99, 120, 8, 8);
+CALL sp_agregarProducto( 'Frijoles', 3.49, 40.99, 78.99, 110, 9, 9);
+CALL sp_agregarProducto( 'Aceite', 4.99, 55.99, 108.99, 60, 10, 10);
+CALL sp_agregarProducto( 'Sal', 0.99, 10.99, 19.99, 200, 2, 3);
 
 -- ------------------------------------------------------------------------------- LISTA --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -603,7 +563,7 @@ call sp_mostrarProductos();
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 DELIMITER $$
-create procedure sp_actualizarProducto(in odigoProducto varchar(15),in uevaDescripcionProducto varchar(15),in uevoPrecioUnitario decimal(10,2),in uevoPrecioDocena decimal(10,2),in uevoPrecioMayor decimal(10,2),in uevaExistencia int,in uevoCodigoTipoProducto int,in uevoCodigoProveedor int)
+create procedure sp_actualizarProducto(in odigoProducto int,in uevaDescripcionProducto varchar(15),in uevoPrecioUnitario decimal(10,2),in uevoPrecioDocena decimal(10,2),in uevoPrecioMayor decimal(10,2),in uevaExistencia int,in uevoCodigoTipoProducto int,in uevoCodigoProveedor int)
 begin
     update Productos
     set descripcionProducto = uevaDescripcionProducto,
@@ -617,13 +577,13 @@ begin
 end$$
 DELIMITER ;
 
-call sp_actualizarProducto('P001', 'Pollo', 8.99, 69.99, 130.99, 100, 2, 2);
+call sp_actualizarProducto(1, 'Pollo', 8.99, 69.99, 130.99, 100, 2, 2);
 
 -- ------------------------------------------------------------------------------- ELIMINAR --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Delimiter $$
-create procedure sp_eliminarProducto(in _codigoProducto varchar(15))
+create procedure sp_eliminarProducto(in _codigoProducto int)
 begin
     delete from Productos
     where codigoProducto = _codigoProducto;
@@ -631,10 +591,18 @@ end $$
 
 DELIMITER ;
 
-call sp_eliminarProducto('P011');
+call sp_eliminarProducto('11');
 
 
-
+-- ------------------------------------------------------------------------------- Buscar --------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+delimiter $$
+create procedure sp_BuscarProductos(in odigoProducto int)
+begin 
+  select *from Productos where Productos.codigoProducto = odigoProducto;
+end$$ 
+delimiter ;
+call sp_BuscarProductos(1);
 
 
 
@@ -645,22 +613,22 @@ call sp_eliminarProducto('P011');
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DELIMITER $$
 
-CREATE PROCEDURE sp_AgregarDetalleCompra(IN p_costoUnitario DECIMAL(10,2),IN p_cantidad INT,IN p_codigoProducto VARCHAR(15),IN p_numeroDocumento INT)
+CREATE PROCEDURE sp_AgregarDetalleCompra(IN p_costoUnitario DECIMAL(10,2),IN p_cantidad INT,IN p_codigoProducto int,IN p_numeroDocumento INT)
 BEGIN
     INSERT INTO DetalleCompra( DetalleCompra.costoUnitario, DetalleCompra.cantidad, DetalleCompra.codigoProducto, DetalleCompra.numeroDocumento)
     VALUES( p_costoUnitario, p_cantidad, p_codigoProducto, p_numeroDocumento);
 END$$
 delimiter ;
-CALL sp_AgregarDetalleCompra(23.45, 34, 'P001', 1);
-CALL sp_AgregarDetalleCompra(17.89, 22, 'P002', 2);
-CALL sp_AgregarDetalleCompra(10.67, 45, 'P003', 3);
-CALL sp_AgregarDetalleCompra(35.60, 18, 'P004', 4);
-CALL sp_AgregarDetalleCompra(28.75, 39, 'P005', 5);
-CALL sp_AgregarDetalleCompra(19.99, 27, 'P006', 6);
-CALL sp_AgregarDetalleCompra(42.30, 31, 'P007', 7);
-CALL sp_AgregarDetalleCompra(15.50, 14, 'P008', 8);
-CALL sp_AgregarDetalleCompra(29.75, 26, 'P009', 9);
-CALL sp_AgregarDetalleCompra(38.20, 19, 'P010', 10);
+CALL sp_AgregarDetalleCompra(23.45, 34, 1, 1);
+CALL sp_AgregarDetalleCompra(17.89, 22, 2, 2);
+CALL sp_AgregarDetalleCompra(10.67, 45, 3, 3);
+CALL sp_AgregarDetalleCompra(35.60, 18, 4, 4);
+CALL sp_AgregarDetalleCompra(28.75, 39, 5, 5);
+CALL sp_AgregarDetalleCompra(19.99, 27, 6, 6);
+CALL sp_AgregarDetalleCompra(42.30, 31, 7, 7);
+CALL sp_AgregarDetalleCompra(15.50, 14, 8, 8);
+CALL sp_AgregarDetalleCompra(29.75, 26, 9, 9);
+CALL sp_AgregarDetalleCompra(38.20, 19, 10, 10);
 
 
 
@@ -677,7 +645,7 @@ call sp_EliminarCargoEmpleado ('10');
 -- ------------------------------------------------------------------------------- EDITAR --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 delimiter $$
-create procedure sp_ActualizarDetalleCompra(in odigoDetalleCompra int,IN p_costoUnitario DECIMAL(10,2),IN p_cantidad INT,IN p_codigoProducto VARCHAR(15),IN p_numeroDocumento INT)
+create procedure sp_ActualizarDetalleCompra(in odigoDetalleCompra int,IN p_costoUnitario DECIMAL(10,2),IN p_cantidad INT,IN p_codigoProducto int,IN p_numeroDocumento INT)
 begin
     update DetalleCompra
     set 
@@ -692,7 +660,7 @@ begin
 end$$
 delimiter ;
 
-call sp_ActualizarDetalleCompra(1,23.45, 34, 'P002', 2);
+call sp_ActualizarDetalleCompra(1,23.45, 34, 2, 2);
 -- ------------------------------------------------------------------------------- LISTA --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -719,11 +687,6 @@ end$$
 delimiter ;
 call sp_BuscarDetalleCompra(1);
 
-
-
-
-
-
 -- ------------------------------------------------------------------------------- Empleado --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -747,8 +710,6 @@ CALL sp_AgregarEmpleado('Maria Isabel', 'Hernandez Lopez', 220.60, 'zona 9', 'Te
 CALL sp_AgregarEmpleado('Juan Carlos', 'Vargas Morales', 195.40, 'zona 3', 'Primer turno', 7);
 CALL sp_AgregarEmpleado('Elena Patricia', 'Fernandez Jimenez', 230.25, 'zona 7', 'Segundo turno', 8);
 CALL sp_AgregarEmpleado('Miguel Angel', 'Castro Garcia', 175.90, 'zona 6', 'Tercer turno', 9);
-
-
 
 -- ------------------------------------------------------------------------------- ELIMINAR --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -806,13 +767,7 @@ end$$
 delimiter ;
 call sp_BuscarEmpleados(1);
 
-
-
-
-
-
-
--- ------------------------------------------------------------------------------- Facctura  --------------------------------------------------------------------------------------------------------
+-- ------------------------------------------------------------------------------- Factura  --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 -- ------------------------------------------------------------------------------- AGREGAR --------------------------------------------------------------------------------------------------------
@@ -835,8 +790,6 @@ CALL sp_AgregarFactura('Pendiente', 4150.25, '2024-05-20', 6, 6);
 CALL sp_AgregarFactura('Pagada', 5000.00, '2024-05-08', 7, 7);
 CALL sp_AgregarFactura('Pendiente', 2750.40, '2024-05-15', 8, 8);
 CALL sp_AgregarFactura('Parcialmente Pagada', 2100.00, '2024-04-28', 9, 9);
-
-
 
 -- ------------------------------------------------------------------------------- ELIMINAR --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -891,13 +844,6 @@ end$$
 delimiter ;
 call sp_BuscarFactura(1);
 
-
-
-
-
-
-
-
 -- ------------------------------------------------------------------------------- DetalleFactura  --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -905,25 +851,22 @@ call sp_BuscarFactura(1);
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DELIMITER $$
 
-CREATE PROCEDURE sp_AgregarDetalleFactura (IN p_precioUnitario DECIMAL(10,2),IN p_cantidad INT,IN p_numeroDeFactura INT,IN p_codigoProducto VARCHAR(15)
-)
+CREATE PROCEDURE sp_AgregarDetalleFactura (IN p_precioUnitario DECIMAL(10,2),IN p_cantidad INT,IN p_numeroDeFactura INT,IN p_codigoProducto int)
 BEGIN
     INSERT INTO DetalleFactura( precioUnitario, cantidad, numeroDeFactura, codigoProducto)
     VALUES( p_precioUnitario, p_cantidad, p_numeroDeFactura, p_codigoProducto);
 END$$
 delimiter ;
 
-CALL sp_AgregarDetalleFactura(123.00, 234, 1, 'P001');
-CALL sp_AgregarDetalleFactura(150.00, 235, 2, 'P002');
-CALL sp_AgregarDetalleFactura(300.75, 236, 3, 'P003');
-CALL sp_AgregarDetalleFactura(450.50, 237, 4, 'P004');
-CALL sp_AgregarDetalleFactura(200.00, 238, 5, 'P005');
-CALL sp_AgregarDetalleFactura(175.25, 239, 6, 'P006');
-CALL sp_AgregarDetalleFactura(225.00, 240, 7, 'P007');
-CALL sp_AgregarDetalleFactura(500.80, 241, 8, 'P008');
-CALL sp_AgregarDetalleFactura(350.60, 242, 9, 'P009');
-
-
+CALL sp_AgregarDetalleFactura(123.00, 234, 1, 1);
+CALL sp_AgregarDetalleFactura(150.00, 235, 2, 2);
+CALL sp_AgregarDetalleFactura(300.75, 236, 3, 3);
+CALL sp_AgregarDetalleFactura(450.50, 237, 4, 4);
+CALL sp_AgregarDetalleFactura(200.00, 238, 5, 5);
+CALL sp_AgregarDetalleFactura(175.25, 239, 6, 6);
+CALL sp_AgregarDetalleFactura(225.00, 240, 7, 7);
+CALL sp_AgregarDetalleFactura(500.80, 241, 8, 8);
+CALL sp_AgregarDetalleFactura(350.60, 242, 9, 9);
 
 -- ------------------------------------------------------------------------------- ELIMINAR --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -938,7 +881,7 @@ call sp_EliminarDetalleFactura ('10');
 -- ------------------------------------------------------------------------------- EDITAR --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 delimiter $$
-create procedure sp_ActualizarDetalleFactura (IN odigoDetalleFactura INT,IN p_nuevoPrecioUnitario DECIMAL(10,2),IN p_nuevaCantidad INT,IN p_nuevoNumeroDeFactura INT,IN p_nuevoCodigoProducto VARCHAR(15))
+create procedure sp_ActualizarDetalleFactura (IN odigoDetalleFactura INT,IN p_nuevoPrecioUnitario DECIMAL(10,2),IN p_nuevaCantidad INT,IN p_nuevoNumeroDeFactura INT,IN p_nuevoCodigoProducto int)
 begin
     update DetalleFactura
     SET precioUnitario = p_nuevoPrecioUnitario,
@@ -949,7 +892,7 @@ begin
 end$$
 delimiter ;
 
-call sp_ActualizarDetalleFactura(1,23.55, 234, 1, 'P001');
+call sp_ActualizarDetalleFactura(1,23.55, 234, 1, 1);
 -- ------------------------------------------------------------------------------- LISTA --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

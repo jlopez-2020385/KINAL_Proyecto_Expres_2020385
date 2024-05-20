@@ -18,13 +18,13 @@
             <Image url="@../imagenes/Fondo3.png" />
          </image>
       </ImageView>
-      <TableView fx:id="tblFactura" layoutX="108.0" layoutY="150.0" onMouseClicked="#selecionarElementos" prefHeight="312.0" prefWidth="988.0" stylesheets="@../resource/KinalExpressCSS.css">
+      <TableView fx:id="tblDetalleFactura" layoutX="108.0" layoutY="150.0" onMouseClicked="#selecionarElementos" prefHeight="312.0" prefWidth="988.0" stylesheets="@../resource/KinalExpressCSS.css">
          <columns>
-            <TableColumn fx:id="colNumeroDeFactura" minWidth="50.0" prefWidth="161.0" text="numeroDeFactura" />
-            <TableColumn fx:id="colEstado" minWidth="117.0" prefWidth="205.0" text="estado" />
-            <TableColumn fx:id="colTotalFactura" minWidth="85.0" prefWidth="216.0" text="totalFactura" />
-            <TableColumn fx:id="colFechaFactura" minWidth="0.0" prefWidth="166.0" text="fechaFactura" />
-            <TableColumn fx:id="colCodigoclienteID" prefWidth="240.0" text="clienteID" />
+            <TableColumn fx:id="colCodigoDetalleFactura" minWidth="50.0" prefWidth="161.0" text="codigoDetalleFactura" />
+            <TableColumn fx:id="colPrecioUnitario" minWidth="117.0" prefWidth="205.0" text="precioUnitario" />
+            <TableColumn fx:id="colCantidad" minWidth="85.0" prefWidth="216.0" text="cantidad" />
+            <TableColumn fx:id="colNumerodeFactura" minWidth="0.0" prefWidth="202.0" text="numeroDeFactura" />
+            <TableColumn fx:id="colCodigoProducto" prefWidth="204.0" text="codigoProducto" />
          </columns>
          <styleClass>
             <String fx:value="filler" />
@@ -32,11 +32,11 @@
             <String fx:value="table-row-cell" />
          </styleClass>
       </TableView>
-      <TextField fx:id="txtNumeroDeFactura" layoutX="433.0" layoutY="104.0" prefHeight="25.0" prefWidth="186.0" />
-      <TextField fx:id="txtNumeroDeFactura1" layoutX="433.0" layoutY="64.0" prefHeight="25.0" prefWidth="186.0" />
-      <TextField fx:id="txtNumeroDeFactura2" layoutX="433.0" layoutY="24.0" prefHeight="25.0" prefWidth="186.0" />
-      <ComboBox fx:id="cmbCodigoclienteID" layoutX="773.0" layoutY="24.0" prefHeight="25.0" prefWidth="186.0" />
-      <ComboBox fx:id="cmbCodigoclienteID1" layoutX="773.0" layoutY="64.0" prefHeight="25.0" prefWidth="186.0" />
+      <TextField fx:id="txtCantidad" layoutX="433.0" layoutY="104.0" prefHeight="25.0" prefWidth="186.0" />
+      <TextField fx:id="txtPrecioUnitario" layoutX="433.0" layoutY="64.0" prefHeight="25.0" prefWidth="186.0" />
+      <TextField fx:id="txtCodigoDetalleFactura" layoutX="433.0" layoutY="24.0" prefHeight="25.0" prefWidth="186.0" />
+      <ComboBox fx:id="cmbNumeroDeFactura" layoutX="773.0" layoutY="24.0" prefHeight="25.0" prefWidth="186.0" />
+      <ComboBox fx:id="cmbCodigoProducto" layoutX="773.0" layoutY="64.0" prefHeight="25.0" prefWidth="186.0" />
       <Button fx:id="btnRegresar" layoutX="32.0" layoutY="543.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="88.0" prefWidth="138.0" stylesheets="@../resource/KinalExpressCSS.css">
          <styleClass>
             <String fx:value="button1" />

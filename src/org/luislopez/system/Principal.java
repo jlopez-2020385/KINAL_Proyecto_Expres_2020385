@@ -15,6 +15,7 @@ import org.luislopez.controller.DatePickerController;
 import org.luislopez.controller.MenuCargoEmpleadoController;
 import org.luislopez.controller.MenuClientessController;
 import org.luislopez.controller.MenuComprasController;
+import org.luislopez.controller.MenuDetalleFacturaController;
 import org.luislopez.controller.MenuEmpleadoController;
 import org.luislopez.controller.MenuFacturaController;
 
@@ -29,7 +30,6 @@ import org.luislopez.controller.ProgramadoController;
  *carnet 2020385
  * IN5BM
  * fecha de Creacion : 10/04/2024
- * fecha de modificaciones:
  */
 public class Principal extends Application {
     private Stage escenarioPrincipal;
@@ -145,7 +145,14 @@ public class Principal extends Application {
         }
     }        
     
-    
+    public void menuDetalleFacturaView(){
+        try{
+            MenuDetalleFacturaController menuDetalleFacturaController=(MenuDetalleFacturaController)cambiarEscena("MenuDetalleFactura.fxml",1120,620);
+            menuDetalleFacturaController.setEscenarioPrincipal(this);
+        }catch(Exception e){
+            System.out.println(e.getMessage()); 
+        }
+    }       
     
     public void menuEmpleadoView(){
         try{
