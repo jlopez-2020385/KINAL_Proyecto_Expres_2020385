@@ -11,12 +11,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="620.0" prefWidth="1122.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="org.luislopez.controller.MenuCargoEmpleadoController">
+<AnchorPane id="AnchorPane" prefHeight="620.0" prefWidth="1122.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.luislopez.controller.MenuCargoEmpleadoController">
    <children>
       <ImageView fitHeight="639.0" fitWidth="1132.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../imagenes/1.png" />
+            <Image url="@../imagenes/Proveedores.png" />
          </image>
       </ImageView>
       <TableView fx:id="tblCargoEmpleado" layoutX="64.0" layoutY="176.0" onMouseClicked="#selecionarElementos" prefHeight="320.0" prefWidth="1022.0" stylesheets="@../resource/KinalExpressCSS.css">

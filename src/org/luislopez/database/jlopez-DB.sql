@@ -53,8 +53,6 @@ create table Proveedores(
 
 );
 
-
-
 create table Productos(
 	codigoProducto varchar(15),
 	descripcionProducto varchar(15),
@@ -69,6 +67,58 @@ create table Productos(
 	foreign key (codigoTipoProducto) references TipoProducto(codigoTipoProducto),
 	foreign key (codigoProveedor) references Proveedores(codigoProveedor)
 );
+
+create table DetalleCompra(
+	codigoDetalleCompra int auto_increment,
+	costoUnitario decimal(10,2),
+	cantidad int,
+	codigoProducto varchar(15),
+	numeroDocumento int,
+	primary key PK_codigoDetalleCompra (codigoDetalleCompra),
+	foreign key (codigoProducto) REFERENCES Productos(codigoProducto),
+	foreign key (numeroDocumento) REFERENCES Compras(numeroDocumento)
+    
+);
+
+
+create table Empleados(
+	codigoEmpleado int auto_increment,
+	nombresEmpleado varchar(50),
+	apellidosEmpleado varchar(50),
+	sueldo decimal(10,2),
+	direccion varchar(150),
+	turno varchar(15),
+	codigoCargoEmpleado int,
+	primary key PK_codigoEmpleado (codigoEmpleado),
+	foreign key (codigoCargoEmpleado) REFERENCES CargoEmpleado(codigoCargoEmpleado)
+
+);
+
+
+create table Factura(
+	numeroDeFactura int auto_increment,
+	estado varchar(50),
+	totalFactura decimal(10,2),
+	fechaFactura varchar(45),
+	clienteID int,
+	codigoEmpleado int,
+	primary key PK_numeroDeFactura (numeroDeFactura),
+	foreign key (clienteID) REFERENCES Clientes(clienteID),
+	foreign key (codigoEmpleado) REFERENCES Empleados(codigoEmpleado)
+
+);
+
+CREATE TABLE DetalleFactura(
+	codigoDetalleFactura int auto_increment,
+	precioUnitario decimal(10,2),
+	cantidad int,
+	numeroDeFactura int,
+	codigoProducto varchar(15),
+	primary key PK_codigoDetalleFactura (codigoDetalleFactura),
+	foreign key (numeroDeFactura) REFERENCES Factura(numeroDeFactura),
+	foreign key (codigoProducto) REFERENCES Productos(codigoProducto)
+);
+
 
 
 -- ------------------------------------------------------------------------------- Clientes --------------------------------------------------------------------------------------------------------
@@ -155,7 +205,7 @@ begin
   select *from Clientes where Clientes.clienteID=ienteID;
 end$$ 
 delimiter ;
-call sp_BuscarClientes(1);
+ call sp_BuscarClientes(1);
 
 
 
@@ -355,7 +405,12 @@ call sp_AgregarCompras('2021-06-30','2 Blusas de moda, 1 Falda plisada, 1 Collar
 call sp_AgregarCompras('2021-04-18','1 Camiseta de algodón orgánico, 1 Pantalón de yoga, 1 Tapete de yoga antideslizante.',79.99);
 call sp_AgregarCompras('2021-02-13','1 Vestido de noche elegante, 1 Bolso de fiesta, 1 Par de tacones altos.',199.99);
 call sp_AgregarCompras('2020-12-09','1 Set de cocina de acero inoxidable, 1 Juego de cuchillos profesionales, 1 Tabla de cortar de bambú.',129.95);
-
+call sp_AgregarCompras('2020-06-12', '2 Camisetas de algodón, 1 Pantalón de mezclilla, 1 Par de zapatos deportivos, 1 Mochila resistente.', 199.88);
+call sp_AgregarCompras('2021-07-17', '1 Conjunto de pijama de franela, 1 Bata de baño suave, 1 Par de pantuflas cómodas.', 99.99);
+call sp_AgregarCompras('2021-06-30', '2 Blusas de moda, 1 Falda plisada, 1 Collar de perlas.', 149.50);
+call sp_AgregarCompras('2021-04-18', '1 Camiseta de algodón orgánico, 1 Pantalón de yoga, 1 Tapete de yoga antideslizante.', 79.99);
+call sp_AgregarCompras('2021-02-13', '1 Vestido de noche elegante, 1 Bolso de fiesta, 1 Par de tacones altos.', 199.99);
+call sp_AgregarCompras('2020-12-09', '1 Set de cocina de acero inoxidable, 1 Juego de cuchillos profesionales, 1 Tabla de cortar de bambú.', 129.95);
 
 
 -- ------------------------------------------------------------------------------- ELIMINAR --------------------------------------------------------------------------------------------------------
@@ -367,7 +422,7 @@ begin
     where Compras.numeroDocumento = umeroDocumento;
 end$$
 delimiter ;
-call sp_EliminarCompras ('5');
+call sp_EliminarCompras ('12');
 -- ------------------------------------------------------------------------------- EDITAR --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 delimiter $$
@@ -428,15 +483,19 @@ begin
 		values (ombreCargo,escripcionCargo);
 end $$        
 delimiter ;
-call sp_AgregarCargoEmpleado('Gerente de Ventas','Lidera equipo, establece objetivos, incrementa ventas.');
-call sp_AgregarCargoEmpleado('Analista de Marketing','Investiga mercado, desarrolla estrategias, analiza datos.');
-call sp_AgregarCargoEmpleado('Ingeniero de Software','Diseña, desarrolla, prueba software.');
-call sp_AgregarCargoEmpleado('Asistente Administrativo','Brinda apoyo administrativo.');
-call sp_AgregarCargoEmpleado('Especialista en Recursos Humanos','Gestiona personal, administra beneficios, resuelve conflictos.');
-call sp_AgregarCargoEmpleado('Contador Financiero','Gestiona finanzas, prepara informes, asesora financiero.');
 
-
-
+CALL sp_AgregarCargoEmpleado('Gerente de Ventas', 'Lidera equipo, establece objetivos, incrementa ventas.');
+CALL sp_AgregarCargoEmpleado('Analista de Marketing', 'Investiga mercado, desarrolla estrategias, analiza datos.');
+CALL sp_AgregarCargoEmpleado('Ingeniero de Software', 'Diseña, desarrolla, prueba software.');
+CALL sp_AgregarCargoEmpleado('Asistente Administrativo', 'Brinda apoyo administrativo.');
+CALL sp_AgregarCargoEmpleado('Especialista en Recursos Humanos', 'Gestiona personal, administra beneficios, resuelve conflictos.');
+CALL sp_AgregarCargoEmpleado('Contador Financiero', 'Gestiona finanzas, prepara informes, asesora financiero.');
+CALL sp_AgregarCargoEmpleado('Director de Operaciones', 'Supervisa operaciones, optimiza procesos, mejora eficiencia.');
+CALL sp_AgregarCargoEmpleado('Desarrollador Web', 'Crea y mantiene sitios web, optimiza rendimiento.');
+CALL sp_AgregarCargoEmpleado('Gerente de Proyecto', 'Planifica, ejecuta, cierra proyectos.');
+CALL sp_AgregarCargoEmpleado('Especialista en Atención al Cliente', 'Resuelve , mejora satisfacción, gestiona quejas.');
+CALL sp_AgregarCargoEmpleado('Consultor de Negocios', 'Asesora empresas, analiza procesos, recomienda mejoras.');
+CALL sp_AgregarCargoEmpleado('Diseñador Gráfico', 'Crea contenido visual, diseña materiales , identidades de marca.');
 -- ------------------------------------------------------------------------------- ELIMINAR --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 delimiter $$
@@ -446,7 +505,7 @@ begin
     where CargoEmpleado.codigoCargoEmpleado = odigoCargoEmpleado;
 end$$
 delimiter ;
-call sp_EliminarCargoEmpleado ('5');
+call sp_EliminarCargoEmpleado ('12');
 -- ------------------------------------------------------------------------------- EDITAR --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 delimiter $$
@@ -576,6 +635,346 @@ call sp_eliminarProducto('P011');
 
 
 
+
+
+
+-- ------------------------------------------------------------------------------- DetalleCompra --------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- ------------------------------------------------------------------------------- AGREGAR --------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DELIMITER $$
+
+CREATE PROCEDURE sp_AgregarDetalleCompra(IN p_costoUnitario DECIMAL(10,2),IN p_cantidad INT,IN p_codigoProducto VARCHAR(15),IN p_numeroDocumento INT)
+BEGIN
+    INSERT INTO DetalleCompra( DetalleCompra.costoUnitario, DetalleCompra.cantidad, DetalleCompra.codigoProducto, DetalleCompra.numeroDocumento)
+    VALUES( p_costoUnitario, p_cantidad, p_codigoProducto, p_numeroDocumento);
+END$$
+delimiter ;
+CALL sp_AgregarDetalleCompra(23.45, 34, 'P001', 1);
+CALL sp_AgregarDetalleCompra(17.89, 22, 'P002', 2);
+CALL sp_AgregarDetalleCompra(10.67, 45, 'P003', 3);
+CALL sp_AgregarDetalleCompra(35.60, 18, 'P004', 4);
+CALL sp_AgregarDetalleCompra(28.75, 39, 'P005', 5);
+CALL sp_AgregarDetalleCompra(19.99, 27, 'P006', 6);
+CALL sp_AgregarDetalleCompra(42.30, 31, 'P007', 7);
+CALL sp_AgregarDetalleCompra(15.50, 14, 'P008', 8);
+CALL sp_AgregarDetalleCompra(29.75, 26, 'P009', 9);
+CALL sp_AgregarDetalleCompra(38.20, 19, 'P010', 10);
+
+
+
+-- ------------------------------------------------------------------------------- ELIMINAR --------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+delimiter $$
+create procedure sp_EliminarDetalleCompra(in odigoDetalleCompra int)
+begin
+    delete from DetalleCompra
+    where DetalleCompra.codigoDetalleCompra = odigoDetalleCompra;
+end$$
+delimiter ;
+call sp_EliminarCargoEmpleado ('10');
+-- ------------------------------------------------------------------------------- EDITAR --------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+delimiter $$
+create procedure sp_ActualizarDetalleCompra(in odigoDetalleCompra int,IN p_costoUnitario DECIMAL(10,2),IN p_cantidad INT,IN p_codigoProducto VARCHAR(15),IN p_numeroDocumento INT)
+begin
+    update DetalleCompra
+    set 
+        DetalleCompra.costoUnitario = p_costoUnitario,
+        DetalleCompra.cantidad = p_cantidad,
+        DetalleCompra.codigoProducto = p_codigoProducto,
+        DetalleCompra.numeroDocumento = p_numeroDocumento
+
+        
+        where
+        DetalleCompra.codigoDetalleCompra = odigoDetalleCompra;
+end$$
+delimiter ;
+
+call sp_ActualizarDetalleCompra(1,23.45, 34, 'P002', 2);
+-- ------------------------------------------------------------------------------- LISTA --------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+delimiter $$
+create procedure sp_MostrarDetalleCompra ()
+begin 
+	select
+	d.codigoDetalleCompra,
+	d.costoUnitario,
+	d.cantidad, 
+	d.codigoProducto,
+	d.numeroDocumento 
+    from detalleCompra d;
+end $$        
+delimiter ;
+call sp_MostrarDetalleCompra;
+-- ------------------------------------------------------------------------------- Buscar --------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+delimiter $$
+create procedure sp_BuscarDetalleCompra(in odigoDetalleCompra int)
+begin 
+  select *from DetalleCompra where DetalleCompra.codigoDetalleCompra = odigoDetalleCompra;
+end$$ 
+delimiter ;
+call sp_BuscarDetalleCompra(1);
+
+
+
+
+
+
+-- ------------------------------------------------------------------------------- Empleado --------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- ------------------------------------------------------------------------------- AGREGAR --------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DELIMITER $$
+
+CREATE PROCEDURE sp_AgregarEmpleado(IN p_nombresEmpleado VARCHAR(50),IN p_apellidosEmpleado VARCHAR(50),IN p_sueldo DECIMAL(10,2),IN p_direccion VARCHAR(150),IN p_turno VARCHAR(15),IN p_codigoCargoEmpleado INT)
+BEGIN
+    INSERT INTO Empleados(nombresEmpleado, apellidosEmpleado, sueldo, direccion, turno, codigoCargoEmpleado)
+    VALUES( p_nombresEmpleado, p_apellidosEmpleado, p_sueldo, p_direccion, p_turno, p_codigoCargoEmpleado);
+END$$
+delimiter ;
+
+CALL sp_AgregarEmpleado('Jose Emanuel', 'López Laynes', 234.56, 'zona 12', 'Primer turno', 1);
+CALL sp_AgregarEmpleado('Ana Maria', 'Gomez Perez', 190.75, 'zona 4', 'Segundo turno', 2);
+CALL sp_AgregarEmpleado('Carlos Alberto', 'Ramirez Torres', 210.30, 'zona 8', 'Tercer turno', 3);
+CALL sp_AgregarEmpleado('Luisa Fernanda', 'Martinez Diaz', 180.50, 'zona 10', 'Primer turno', 4);
+CALL sp_AgregarEmpleado('Pedro Juan', 'Mendez Ruiz', 200.80, 'zona 5', 'Segundo turno', 5);
+CALL sp_AgregarEmpleado('Maria Isabel', 'Hernandez Lopez', 220.60, 'zona 9', 'Tercer turno', 6);
+CALL sp_AgregarEmpleado('Juan Carlos', 'Vargas Morales', 195.40, 'zona 3', 'Primer turno', 7);
+CALL sp_AgregarEmpleado('Elena Patricia', 'Fernandez Jimenez', 230.25, 'zona 7', 'Segundo turno', 8);
+CALL sp_AgregarEmpleado('Miguel Angel', 'Castro Garcia', 175.90, 'zona 6', 'Tercer turno', 9);
+
+
+
+-- ------------------------------------------------------------------------------- ELIMINAR --------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+delimiter $$
+create procedure sp_EliminarEmpleados(in odigoEmpleado int)
+begin
+    delete from Empleados
+    where Empleados.codigoEmpleado = odigoEmpleado;
+end$$
+delimiter ;
+call sp_EliminarEmpleados ('10');
+-- ------------------------------------------------------------------------------- EDITAR --------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+delimiter $$
+create procedure sp_ActualizarEmpleados(IN odigoEmpleado INT,IN p_nuevosNombresEmpleado VARCHAR(50),IN p_nuevosApellidosEmpleado VARCHAR(50),IN p_nuevoSueldo DECIMAL(10,2),IN p_nuevaDireccion VARCHAR(150),IN p_nuevoTurno VARCHAR(15),IN p_nuevoCodigoCargoEmpleado INT
+)
+begin
+    update Empleados
+    set Empleados.nombresEmpleado = p_nuevosNombresEmpleado,
+        Empleados.apellidosEmpleado = p_nuevosApellidosEmpleado,
+        Empleados.sueldo = p_nuevoSueldo,
+        Empleados.direccion = p_nuevaDireccion,
+        Empleados.turno = p_nuevoTurno,
+        Empleados.codigoCargoEmpleado = p_nuevoCodigoCargoEmpleado
+    WHERE Empleados.codigoEmpleado = odigoEmpleado;
+end$$
+delimiter ;
+
+call sp_ActualizarEmpleados(1,'Ana Maria', 'Gomez Perez', 190.75, 'zona 4', 'Segundo turno', 2);
+-- ------------------------------------------------------------------------------- LISTA --------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+delimiter $$
+create procedure sp_MostrarEmpleados ()
+begin 
+	select
+	e.codigoEmpleado,
+	e.nombresEmpleado,
+	e.apellidosEmpleado, 
+	e.sueldo,
+	e.direccion,
+	e.turno,
+	e.codigoCargoEmpleado
+    from empleados e;
+end $$        
+delimiter ;
+call sp_MostrarEmpleados;
+-- ------------------------------------------------------------------------------- Buscar --------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+delimiter $$
+create procedure sp_BuscarEmpleados(in odigoEmpleado int)
+begin 
+  select *from Empleados where Empleados.codigoEmpleado = odigoEmpleado;
+end$$ 
+delimiter ;
+call sp_BuscarEmpleados(1);
+
+
+
+
+
+
+
+-- ------------------------------------------------------------------------------- Facctura  --------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- ------------------------------------------------------------------------------- AGREGAR --------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DELIMITER $$
+
+CREATE PROCEDURE sp_AgregarFactura(IN p_estado VARCHAR(50),IN p_totalFactura DECIMAL(10,2),IN p_fechaFactura VARCHAR(45),IN p_codigoCliente INT,IN p_codigoEmpleado INT)
+BEGIN
+    INSERT INTO Factura(estado, totalFactura, fechaFactura, clienteID, codigoEmpleado)
+    VALUES( p_estado, p_totalFactura, p_fechaFactura, p_codigoCliente, p_codigoEmpleado);
+END$$
+delimiter ;
+
+CALL sp_AgregarFactura('Pendiente', 4125.00, '2024-05-10', 1, 1);
+CALL sp_AgregarFactura('Pagada', 2500.50, '2024-04-15', 2, 2);
+CALL sp_AgregarFactura('Pendiente', 3750.75, '2024-05-05', 3, 3);
+CALL sp_AgregarFactura('Parcialmente Pagada', 1800.00, '2024-05-12', 4, 4);
+CALL sp_AgregarFactura('Cancelada', 3200.00, '2024-05-01', 5, 5);
+CALL sp_AgregarFactura('Pendiente', 4150.25, '2024-05-20', 6, 6);
+CALL sp_AgregarFactura('Pagada', 5000.00, '2024-05-08', 7, 7);
+CALL sp_AgregarFactura('Pendiente', 2750.40, '2024-05-15', 8, 8);
+CALL sp_AgregarFactura('Parcialmente Pagada', 2100.00, '2024-04-28', 9, 9);
+
+
+
+-- ------------------------------------------------------------------------------- ELIMINAR --------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+delimiter $$
+create procedure sp_EliminarFactura(in umeroDeFactura int)
+begin
+    delete from Factura
+    where Factura.numeroDeFactura = umeroDeFactura;
+end$$
+delimiter ;
+call sp_EliminarFactura ('10');
+-- ------------------------------------------------------------------------------- EDITAR --------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+delimiter $$
+create procedure sp_ActualizarFactura (IN umeroDeFactura INT,IN uevoEstado VARCHAR(50),IN uevoTotalFactura DECIMAL(10,2),IN uevaFechaFactura VARCHAR(45),IN uevoCodigoCliente INT,IN uevoCodigoEmpleado INT)
+begin
+    update Factura
+    SET Factura.estado = uevoEstado,
+        Factura.totalFactura = uevoTotalFactura,
+        Factura.fechaFactura = uevaFechaFactura,
+        Factura.clienteID = uevoCodigoCliente,
+        Factura.codigoEmpleado = uevoCodigoEmpleado
+    WHERE Factura.numeroDeFactura = umeroDeFactura;
+end$$
+delimiter ;
+
+call sp_ActualizarFactura(1,'Parcialmente Pagada ', 234.56, '2020-12-09', 1, 1);
+-- ------------------------------------------------------------------------------- LISTA --------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+delimiter $$
+create procedure sp_MostrarFactura ()
+begin 
+	select
+	f.numeroDeFactura,
+	f.estado,
+	f.totalFactura, 
+	f.fechaFactura,
+	f.clienteID,
+	f.codigoEmpleado
+    from factura f;
+end $$        
+delimiter ;
+call sp_MostrarFactura;
+-- ------------------------------------------------------------------------------- Buscar --------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+delimiter $$
+create procedure sp_BuscarFactura(in umeroDeFactura int)
+begin 
+  select *from Factura where Factura.numeroDeFactura = umeroDeFactura;
+end$$ 
+delimiter ;
+call sp_BuscarFactura(1);
+
+
+
+
+
+
+
+
+-- ------------------------------------------------------------------------------- DetalleFactura  --------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- ------------------------------------------------------------------------------- AGREGAR --------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DELIMITER $$
+
+CREATE PROCEDURE sp_AgregarDetalleFactura (IN p_precioUnitario DECIMAL(10,2),IN p_cantidad INT,IN p_numeroDeFactura INT,IN p_codigoProducto VARCHAR(15)
+)
+BEGIN
+    INSERT INTO DetalleFactura( precioUnitario, cantidad, numeroDeFactura, codigoProducto)
+    VALUES( p_precioUnitario, p_cantidad, p_numeroDeFactura, p_codigoProducto);
+END$$
+delimiter ;
+
+CALL sp_AgregarDetalleFactura(123.00, 234, 1, 'P001');
+CALL sp_AgregarDetalleFactura(150.00, 235, 2, 'P002');
+CALL sp_AgregarDetalleFactura(300.75, 236, 3, 'P003');
+CALL sp_AgregarDetalleFactura(450.50, 237, 4, 'P004');
+CALL sp_AgregarDetalleFactura(200.00, 238, 5, 'P005');
+CALL sp_AgregarDetalleFactura(175.25, 239, 6, 'P006');
+CALL sp_AgregarDetalleFactura(225.00, 240, 7, 'P007');
+CALL sp_AgregarDetalleFactura(500.80, 241, 8, 'P008');
+CALL sp_AgregarDetalleFactura(350.60, 242, 9, 'P009');
+
+
+
+-- ------------------------------------------------------------------------------- ELIMINAR --------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+delimiter $$
+create procedure sp_EliminarDetalleFactura(in odigoDetalleFactura int)
+begin
+    delete from DetalleFactura
+    where DetalleFactura.codigoDetalleFactura = odigoDetalleFactura;
+end$$
+delimiter ;
+call sp_EliminarDetalleFactura ('10');
+-- ------------------------------------------------------------------------------- EDITAR --------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+delimiter $$
+create procedure sp_ActualizarDetalleFactura (IN odigoDetalleFactura INT,IN p_nuevoPrecioUnitario DECIMAL(10,2),IN p_nuevaCantidad INT,IN p_nuevoNumeroDeFactura INT,IN p_nuevoCodigoProducto VARCHAR(15))
+begin
+    update DetalleFactura
+    SET precioUnitario = p_nuevoPrecioUnitario,
+        cantidad = p_nuevaCantidad,
+        numeroDeFactura = p_nuevoNumeroDeFactura,
+        codigoProducto = p_nuevoCodigoProducto
+    WHERE codigoDetalleFactura = odigoDetalleFactura;
+end$$
+delimiter ;
+
+call sp_ActualizarDetalleFactura(1,23.55, 234, 1, 'P001');
+-- ------------------------------------------------------------------------------- LISTA --------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+delimiter $$
+create procedure sp_MostrarDetalleFactura()
+begin 
+	select
+	d.codigoDetalleFactura,
+	d.precioUnitario,
+	d.cantidad, 
+	d.numeroDeFactura,
+	d.codigoProducto
+    from detalleFactura d;
+end $$        
+delimiter ;
+call sp_MostrarDetalleFactura;
+-- ------------------------------------------------------------------------------- Buscar --------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+delimiter $$
+create procedure sp_BuscarDetalleFactura(in odigoDetalleFactura int)
+begin 
+  select *from DetalleFactura where DetalleFactura.codigoDetalleFactura = odigoDetalleFactura;
+end$$ 
+delimiter ;
+call sp_BuscarDetalleFactura(1);
 
 
 

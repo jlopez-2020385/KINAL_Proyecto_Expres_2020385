@@ -15,6 +15,8 @@ import org.luislopez.controller.DatePickerController;
 import org.luislopez.controller.MenuCargoEmpleadoController;
 import org.luislopez.controller.MenuClientessController;
 import org.luislopez.controller.MenuComprasController;
+import org.luislopez.controller.MenuEmpleadoController;
+import org.luislopez.controller.MenuFacturaController;
 
 import org.luislopez.controller.MenuPrincipalController;
 import org.luislopez.controller.MenuProductoController;
@@ -133,6 +135,27 @@ public class Principal extends Application {
             System.out.println(e.getMessage()); 
         }
     }       
+    
+    public void menuFacturaView(){
+        try{
+            MenuFacturaController menuFacturaController=(MenuFacturaController)cambiarEscena("MenuFactura.fxml",1120,620);
+            menuFacturaController.setEscenarioPrincipal(this);
+        }catch(Exception e){
+            System.out.println(e.getMessage()); 
+        }
+    }        
+    
+    
+    
+    public void menuEmpleadoView(){
+        try{
+            MenuEmpleadoController menuEmpleadoController=(MenuEmpleadoController)cambiarEscena("MenuEmpleado.fxml",1120,620);
+            menuEmpleadoController.setEscenarioPrincipal(this);
+        }catch(Exception e){
+            System.out.println(e.getMessage()); 
+        }
+    }       
+        
     
     
     

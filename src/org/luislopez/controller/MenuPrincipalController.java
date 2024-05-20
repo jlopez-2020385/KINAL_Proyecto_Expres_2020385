@@ -26,6 +26,8 @@ public class MenuPrincipalController  implements Initializable{
     @FXML MenuItem btnCompras;    
     @FXML MenuItem btnCargoEmpleado;   
     @FXML MenuItem btnProducto;    
+    @FXML MenuItem btnEmpleado;     
+    @FXML MenuItem btnFactura;     
     @FXML MenuItem btnFecha;    
     
     
@@ -59,9 +61,12 @@ public class MenuPrincipalController  implements Initializable{
             escenarioPrincipal.menuCargoEmpleadoView();    
         }if(event.getSource() == btnFecha){
             escenarioPrincipal.datePickerView();        
-        }if(event.getSource() == btnProducto)
+        }if(event.getSource() == btnProducto){
             escenarioPrincipal.menuProductoView();
-        
+        }if(event.getSource() == btnEmpleado){
+            escenarioPrincipal.menuEmpleadoView();
+        }if(event.getSource() == btnFactura)
+            escenarioPrincipal.menuFacturaView();        
         
     }
     

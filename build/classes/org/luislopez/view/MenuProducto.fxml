@@ -3,12 +3,14 @@
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="622.0" prefWidth="1121.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.luislopez.controller.MenuProductoController">
    <children>
@@ -34,14 +36,14 @@
             <String fx:value="table-row-cell" />
          </styleClass>
       </TableView>
-      <TextField fx:id="txtCodigoProd" layoutX="400.0" layoutY="14.0" prefHeight="25.0" prefWidth="186.0" />
-      <TextField fx:id="txtDescPro" layoutX="400.0" layoutY="50.0" prefHeight="25.0" prefWidth="186.0" />
-      <TextField fx:id="txtPrecioU" layoutX="400.0" layoutY="85.0" prefHeight="25.0" prefWidth="186.0" />
-      <TextField fx:id="txtPrecioD" layoutX="400.0" layoutY="120.0" prefHeight="25.0" prefWidth="186.0" />
-      <TextField fx:id="txtPrecioM" layoutX="745.0" layoutY="14.0" prefHeight="25.0" prefWidth="186.0" />
-      <TextField fx:id="txtExistencia" layoutX="745.0" layoutY="50.0" prefHeight="25.0" prefWidth="186.0" />
-      <ComboBox fx:id="cmbCodigoTipoP" layoutX="742.0" layoutY="85.0" prefHeight="25.0" prefWidth="186.0" />
-      <ComboBox fx:id="cmbCodProv" layoutX="742.0" layoutY="120.0" prefHeight="25.0" prefWidth="186.0" />
+      <TextField fx:id="txtCodigoProd" layoutX="392.0" layoutY="14.0" prefHeight="25.0" prefWidth="186.0" />
+      <TextField fx:id="txtDescPro" layoutX="392.0" layoutY="50.0" prefHeight="25.0" prefWidth="186.0" />
+      <TextField fx:id="txtPrecioU" layoutX="392.0" layoutY="85.0" prefHeight="25.0" prefWidth="186.0" />
+      <TextField fx:id="txtPrecioD" layoutX="392.0" layoutY="120.0" prefHeight="25.0" prefWidth="186.0" />
+      <TextField fx:id="txtPrecioM" layoutX="759.0" layoutY="14.0" prefHeight="25.0" prefWidth="186.0" />
+      <TextField fx:id="txtExistencia" layoutX="759.0" layoutY="50.0" prefHeight="25.0" prefWidth="186.0" />
+      <ComboBox fx:id="cmbCodigoTipoP" layoutX="759.0" layoutY="85.0" prefHeight="25.0" prefWidth="186.0" />
+      <ComboBox fx:id="cmbCodProv" layoutX="759.0" layoutY="120.0" prefHeight="25.0" prefWidth="186.0" />
       <Button fx:id="btnAgregar" layoutX="195.0" layoutY="478.0" mnemonicParsing="false" onAction="#agregar" prefHeight="76.0" prefWidth="170.0" stylesheets="@../resource/KinalExpressCSS.css" text="Agregar" textAlignment="RIGHT">
          <graphic>
             <ImageView fx:id="imagAgregar" fitHeight="100.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
@@ -94,7 +96,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="btnRegresar" layoutX="12.0" layoutY="536.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="88.0" prefWidth="138.0" stylesheets="@../resource/KinalExpressCSS.css">
+      <Button fx:id="btnRegresar" layoutX="14.0" layoutY="535.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="88.0" prefWidth="138.0" stylesheets="@../resource/KinalExpressCSS.css">
          <styleClass>
             <String fx:value="button1" />
             <String fx:value="Button" />
@@ -107,5 +109,45 @@
             </ImageView>
          </graphic>
       </Button>
+      <Label layoutX="243.0" layoutY="14.0" prefHeight="17.0" prefWidth="149.0" text="ID de Producto">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="243.0" layoutY="85.0" prefHeight="17.0" prefWidth="149.0" text="Precio Unitario">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="243.0" layoutY="120.0" prefHeight="17.0" prefWidth="149.0" text="Precio Docena">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="243.0" layoutY="50.0" prefHeight="25.0" prefWidth="186.0" text="Descripcion">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="610.0" layoutY="14.0" prefHeight="17.0" prefWidth="149.0" text="Precio Mayor">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="610.0" layoutY="50.0" prefHeight="17.0" prefWidth="149.0" text="Existencia">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="610.0" layoutY="85.0" prefHeight="25.0" prefWidth="149.0" text="ID de TipoProducto">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="610.0" layoutY="120.0" prefHeight="25.0" prefWidth="149.0" text="ID de Proveedor">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
