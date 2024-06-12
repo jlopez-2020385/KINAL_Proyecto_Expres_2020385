@@ -7,8 +7,8 @@
 .button1{
     -fx-background-color: transparent
 }
-.Button:hover{ -fx-background-color: #EEBF68;
-               -fx-background-radius: 150;
+.Button:hover{ -fx-background-color: #FF5050;
+               -fx-background-radius: 5;
                -fx-font-size:22px;
                -fx-effect: dropshadow(three-pass-box,black,20,0, 0,0)
     
@@ -16,6 +16,8 @@
 .button2:hover{
     -fx-font-size:22px;
 }
+
+
 
 .button3{
     -fx-background-radius: 30;
@@ -25,6 +27,13 @@
 }
 
 
+.Button4:hover{ -fx-background-color: #FF5050;
+               -fx-background-radius: 2;
+               -fx-font-size:22px;
+               -fx-effect: dropshadow(three-pass-box,black,20,0, 0,0)
+    
+}
+
 .table-view.column-header,
 .table-view.column-backgrond.filler{
     -fx-cell-size:20;
@@ -33,6 +42,14 @@
 
 .table-row-cell:selected{
     -fx-background-color: F4C303;
+}
+
+
+.white-bg{
+    -fx-background-color: #fff;
+}
+.shadow{
+    -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.5),5,0,0,0);
 }
 
 

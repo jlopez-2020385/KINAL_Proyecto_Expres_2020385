@@ -9,6 +9,8 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,6 +28,7 @@ import org.luislopez.bean.Productos;
 import org.luislopez.bean.Proveedores;
 import org.luislopez.bean.TipoProductos;
 import org.luislopez.db.Conexion;
+import org.luislopez.report.GenerarReportes;
 import org.luislopez.system.Principal;
 
 /**
@@ -41,6 +44,22 @@ public class MenuProductoController implements Initializable {
     private ObservableList <Productos> listaProductos;
     private ObservableList <Proveedores> listaProveedores;
     private ObservableList <TipoProductos> listaTipoDeProducto;
+    
+        @FXML private Button btnRegresar;
+        @FXML private Button btnMenuClientes;
+        @FXML private Button btnProgramador; 
+        @FXML private Button btnProductos;
+        @FXML private Button btnProveedor;
+        @FXML private Button btnCompras;    
+        @FXML private Button btnCargoEmpleado;   
+        @FXML private Button btnProducto;    
+        @FXML private Button btnEmpleado;     
+        @FXML private Button btnFactura;    
+        @FXML private Button btnDetalleFactura;    
+        @FXML private Button btnDetalleCompra;    
+        @FXML private Button btnFecha;    
+        @FXML private Button btnEmailProveedor; 
+    
     
     @FXML private TextField txtCodigoProd;
     @FXML private TextField txtDescPro;
@@ -59,7 +78,6 @@ public class MenuProductoController implements Initializable {
     @FXML private TableColumn colExistencia;
     @FXML private TableColumn colCodTipoProd;
     @FXML private TableColumn colCodProv;
-    @FXML private Button btnRegresar;
     @FXML private Button btnAgregar;
     @FXML private Button btnEliminar;
     @FXML private Button btnEditar;
@@ -245,10 +263,6 @@ public class MenuProductoController implements Initializable {
          registro.setCodigoProveedor(((Proveedores)cmbCodProv.getSelectionModel().getSelectedItem()).getCodigoProveedor());
          registro.setCodigoTipoProducto(((TipoProductos)cmbCodigoTipoP.getSelectionModel().getSelectedItem()).getCodigoTipoProducto());
          registro.setDescripcionProducto(txtDescPro.getText());
-         registro.setPrecioDocena(Double.parseDouble(txtPrecioD.getText()));
-         registro.setPrecioUnitario(Double.parseDouble(txtPrecioU.getText()));
-         registro.setPrecioMayor(Double.parseDouble(txtPrecioM.getText()));
-         registro.setExistencia(Integer.parseInt(txtExistencia.getText()));
          try {
         PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall ("{CALL sp_agregarProducto(?, ?, ?, ?, ?, ?, ?)}");
         procedimiento.setString(1, registro.getDescripcionProducto());
@@ -332,6 +346,15 @@ public class MenuProductoController implements Initializable {
         
     }
      
+     
+    public void imprimirReporte(){
+        Map parametros = new HashMap();
+        parametros.put("codigoProducto",null);
+        GenerarReportes.mostrarReportes("ReporteProductos.jasper", "Reporte de Produsctod", parametros);
+        
+    }     
+     
+     
     public void actualizar(){
         try{
             PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_actualizarProducto(?,?,?,?,?,?,?,?)}");
@@ -365,6 +388,10 @@ public class MenuProductoController implements Initializable {
      
     public void reportes(){
         switch(tipoDeOperacion){
+            case NINGUNO :
+                imprimirReporte();
+                break;
+                
             case ACTUALIZAR:
                 desactivarControles();
                 limpiarControles();                
@@ -416,9 +443,34 @@ public class MenuProductoController implements Initializable {
     }
         
     public void handleButtonAction(ActionEvent event) {
-        if (event.getSource() == btnRegresar) {
-            escenarioPrincipal.menuPrincipalView();
-        }
+        if (event.getSource() == btnRegresar){
+        escenarioPrincipal.menuPrincipalView();
+        }if(event.getSource()==btnMenuClientes){
+            escenarioPrincipal.menuClientessView();
+        }if(event.getSource() == btnProgramador){
+            escenarioPrincipal.programadorView(); 
+        }if(event.getSource() == btnProductos){
+            escenarioPrincipal.menuTipoProductoView();   
+        }if(event.getSource() == btnProveedor){
+            escenarioPrincipal.menuProveedorView();         
+        }if(event.getSource() == btnCompras){
+            escenarioPrincipal.menuComprasView();
+        }if(event.getSource() == btnCargoEmpleado){
+            escenarioPrincipal.menuCargoEmpleadoView();    
+        }if(event.getSource() == btnFecha){
+            escenarioPrincipal.datePickerView();        
+        }if(event.getSource() == btnProducto){
+            escenarioPrincipal.menuProductoView();
+        }if(event.getSource() == btnEmpleado){
+            escenarioPrincipal.menuEmpleadoView();
+        }if(event.getSource() == btnFactura){
+            escenarioPrincipal.menuFacturaView();   
+        }if(event.getSource() == btnDetalleFactura){
+            escenarioPrincipal.menuDetalleFacturaView();         
+        }if(event.getSource() == btnDetalleCompra){
+            escenarioPrincipal.menuDetalleCompraView();   
+        }if(event.getSource() == btnEmailProveedor)
+            escenarioPrincipal.menuEmailProveedorView();  
     }
     
           public Principal getEscenarioPrincipal() {

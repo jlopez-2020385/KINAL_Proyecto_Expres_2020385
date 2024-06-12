@@ -9,16 +9,22 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="620.0" prefWidth="1120.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.luislopez.controller.MenuProveedorController">
+<AnchorPane id="AnchorPane" prefHeight="841.0" prefWidth="1507.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.luislopez.controller.MenuProveedorController">
    <children>
-      <ImageView fitHeight="632.0" fitWidth="1134.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="857.0" fitWidth="1507.0" layoutX="-6.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../imagenes/Proveedores.png" />
+            <Image url="@../imagenes/Fondo3M.png" />
          </image>
       </ImageView>
-      <TableView fx:id="tblProveedores" layoutX="14.0" layoutY="175.0" onMouseClicked="#selecionarElementos" prefHeight="312.0" prefWidth="1092.0" stylesheets="@../resource/KinalExpressCSS.css">
+      <ImageView fitHeight="856.0" fitWidth="1261.0" layoutX="289.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../imagenes/10.png" />
+         </image>
+      </ImageView>
+      <TableView fx:id="tblProveedores" layoutX="369.0" layoutY="239.0" onMouseClicked="#selecionarElementos" prefHeight="417.0" prefWidth="1117.0" stylesheets="@../resource/KinalExpressCSS.css">
          <columns>
             <TableColumn fx:id="colCodigoC" minWidth="50.0" prefWidth="121.0" text="codigoProveedor" />
             <TableColumn fx:id="colNitC" minWidth="91.0" prefWidth="127.0" text="NITProveedor" />
@@ -27,7 +33,7 @@
             <TableColumn fx:id="colDireccionC" minWidth="60.0" prefWidth="149.0" text="direccionProveedor" />
             <TableColumn fx:id="colRasonSocialC" prefWidth="135.0" text="rasonSocial" />
             <TableColumn fx:id="colContactoC" prefWidth="135.0" text="contactoPrincipal" />
-            <TableColumn fx:id="colPaginaWebC" prefWidth="130.0" text="paginaWeb" />
+            <TableColumn fx:id="colPaginaWebC" prefWidth="155.0" text="paginaWeb" />
          </columns>
          <styleClass>
             <String fx:value="filler" />
@@ -35,55 +41,55 @@
             <String fx:value="table-row-cell" />
          </styleClass>
       </TableView>
-      <TextField fx:id="txtCodigoC" layoutX="158.0" layoutY="27.0" prefHeight="25.0" prefWidth="186.0" />
-      <TextField fx:id="txtNit" layoutX="158.0" layoutY="78.0" prefHeight="25.0" prefWidth="186.0" />
-      <TextField fx:id="txtApellidosC" layoutX="538.0" layoutY="27.0" prefHeight="25.0" prefWidth="186.0" />
-      <TextField fx:id="txtNombreC" layoutX="158.0" layoutY="129.0" prefHeight="25.0" prefWidth="186.0" />
-      <TextField fx:id="txtDireccionC" layoutX="538.0" layoutY="78.0" prefHeight="25.0" prefWidth="186.0" />
-      <TextField fx:id="txtRasonSocialC" layoutX="538.0" layoutY="129.0" prefHeight="25.0" prefWidth="186.0" />
-      <TextField fx:id="txtContactoC" layoutX="893.0" layoutY="27.0" prefHeight="25.0" prefWidth="186.0" />
-      <TextField fx:id="txtPaginaWebC" layoutX="893.0" layoutY="78.0" prefHeight="25.0" prefWidth="186.0" />
-      <Label layoutX="14.0" layoutY="31.0" prefHeight="17.0" prefWidth="113.0" text="ID Automatico">
+      <TextField fx:id="txtCodigoC" layoutX="515.0" layoutY="142.0" prefHeight="25.0" prefWidth="186.0" />
+      <TextField fx:id="txtNit" layoutX="515.0" layoutY="189.0" prefHeight="25.0" prefWidth="186.0" />
+      <TextField fx:id="txtApellidosC" layoutX="910.0" layoutY="142.0" prefHeight="25.0" prefWidth="186.0" />
+      <TextField fx:id="txtNombreC" layoutX="910.0" layoutY="91.0" prefHeight="25.0" prefWidth="186.0" />
+      <TextField fx:id="txtDireccionC" layoutX="910.0" layoutY="189.0" prefHeight="25.0" prefWidth="186.0" />
+      <TextField fx:id="txtRasonSocialC" layoutX="1253.0" layoutY="91.0" prefHeight="25.0" prefWidth="186.0" />
+      <TextField fx:id="txtContactoC" layoutX="1253.0" layoutY="142.0" prefHeight="25.0" prefWidth="186.0" />
+      <TextField fx:id="txtPaginaWebC" layoutX="1253.0" layoutY="189.0" prefHeight="25.0" prefWidth="186.0" />
+      <Label layoutX="378.0" layoutY="142.0" prefHeight="17.0" prefWidth="113.0" text="ID Automatico">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="82.0" prefHeight="25.0" prefWidth="129.0" text="NIT de Proveedor">
+      <Label layoutX="378.0" layoutY="189.0" prefHeight="25.0" prefWidth="129.0" text="NIT de Proveedor">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="133.0" prefHeight="25.0" prefWidth="136.0" text="Nombre Proveedor">
+      <Label layoutX="728.0" layoutY="91.0" prefHeight="25.0" prefWidth="136.0" text="Nombre Proveedor">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="365.0" layoutY="27.0" text="Apellido de Proveedor">
+      <Label layoutX="728.0" layoutY="142.0" text="Apellido de Proveedor">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="365.0" layoutY="78.0" text="Direccion de Proveedor">
+      <Label layoutX="724.0" layoutY="189.0" text="Direccion de Proveedor">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="365.0" layoutY="129.0" text="Rason Social">
+      <Label layoutX="1119.0" layoutY="91.0" text="Rason Social">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="748.0" layoutY="31.0" text="Contacto Principal">
+      <Label layoutX="1116.0" layoutY="142.0" text="Contacto Principal">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="748.0" layoutY="82.0" text="Paguina Wep">
+      <Label layoutX="1116.0" layoutY="189.0" text="Paguina Wep">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Button fx:id="btnAgregar" layoutX="204.0" layoutY="487.0" mnemonicParsing="false" onAction="#agregar" prefHeight="76.0" prefWidth="170.0" stylesheets="@../resource/KinalExpressCSS.css" text="Agregar" textAlignment="RIGHT">
+      <Button fx:id="btnAgregar" layoutX="399.0" layoutY="694.0" mnemonicParsing="false" onAction="#agregar" prefHeight="98.0" prefWidth="294.0" stylesheets="@../resource/KinalExpressCSS.css" text="Agregar" textAlignment="RIGHT">
          <graphic>
             <ImageView fx:id="imagAgregar" fitHeight="100.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -95,8 +101,11 @@
             <String fx:value="button1" />
             <String fx:value="button2" />
          </styleClass>
+         <font>
+            <Font size="20.0" />
+         </font>
       </Button>
-      <Button fx:id="btnEditar" layoutX="374.0" layoutY="487.0" mnemonicParsing="false" onAction="#editar" prefHeight="110.0" prefWidth="170.0" stylesheets="@../resource/KinalExpressCSS.css" text="Editar">
+      <Button fx:id="btnEditar" layoutX="654.0" layoutY="688.0" mnemonicParsing="false" onAction="#editar" prefHeight="110.0" prefWidth="294.0" stylesheets="@../resource/KinalExpressCSS.css" text="Editar">
          <graphic>
             <ImageView fitHeight="100.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -108,8 +117,11 @@
             <String fx:value="button1" />
             <String fx:value="button2" />
          </styleClass>
+         <font>
+            <Font size="20.0" />
+         </font>
       </Button>
-      <Button fx:id="btnEliminar" layoutX="538.0" layoutY="487.0" mnemonicParsing="false" onAction="#eliminar" prefHeight="110.0" prefWidth="170.0" stylesheets="@../resource/KinalExpressCSS.css" text="Eliminar">
+      <Button fx:id="btnEliminar" layoutX="928.0" layoutY="688.0" mnemonicParsing="false" onAction="#eliminar" prefHeight="110.0" prefWidth="294.0" stylesheets="@../resource/KinalExpressCSS.css" text="Eliminar">
          <styleClass>
             <String fx:value="button1" />
             <String fx:value="button2" />
@@ -121,8 +133,11 @@
                </image>
             </ImageView>
          </graphic>
+         <font>
+            <Font size="20.0" />
+         </font>
       </Button>
-      <Button fx:id="btnReporte" layoutX="710.0" layoutY="487.0" mnemonicParsing="false" onAction="#reportes" prefHeight="110.0" prefWidth="170.0" stylesheets="@../resource/KinalExpressCSS.css" text="Reportes">
+      <Button fx:id="btnReporte" layoutX="1222.0" layoutY="688.0" mnemonicParsing="false" onAction="#reportes" prefHeight="110.0" prefWidth="294.0" stylesheets="@../resource/KinalExpressCSS.css" text="Reportes">
          <styleClass>
             <String fx:value="button1" />
             <String fx:value="button2" />
@@ -134,19 +149,135 @@
                </image>
             </ImageView>
          </graphic>
+         <font>
+            <Font size="20.0" />
+         </font>
       </Button>
-      <Button fx:id="btnRegresar" layoutX="10.0" layoutY="534.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="98.0" prefWidth="138.0" stylesheets="@../resource/KinalExpressCSS.css">
-         <styleClass>
-            <String fx:value="button1" />
-            <String fx:value="Button" />
-         </styleClass>
-         <graphic>
-            <ImageView fitHeight="115.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="button2">
-               <image>
-                  <Image url="@../imagenes/casa.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
+      <ImageView fitHeight="207.0" fitWidth="213.0" layoutX="41.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../imagenes/eso%20(1).png" />
+         </image>
+      </ImageView>
+      <VBox layoutY="213.0" prefHeight="634.0" prefWidth="289.0">
+         <children>
+            <Button fx:id="btnRegresar" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="289.0" stylesheets="@../resource/KinalExpressCSS.css" text="Administracion  Inicio           " textFill="WHITE">
+               <styleClass>
+                  <String fx:value="button1" />
+                  <String fx:value="Button4" />
+               </styleClass>
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnMenuClientes" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="289.0" stylesheets="@../resource/KinalExpressCSS.css" text="Clientes de Empresa              " textFill="WHITE">
+               <styleClass>
+                  <String fx:value="button1" />
+                  <String fx:value="Button4" />
+               </styleClass>
+               <font>
+                  <Font name="Arial" size="19.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnCargoEmpleado" layoutX="10.0" layoutY="55.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="289.0" stylesheets="@../resource/KinalExpressCSS.css" text="Cargos de Empledos               " textFill="WHITE">
+               <styleClass>
+                  <String fx:value="button1" />
+                  <String fx:value="Button4" />
+               </styleClass>
+               <font>
+                  <Font name="Arial" size="19.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnEmpleado" layoutX="10.0" layoutY="100.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="289.0" stylesheets="@../resource/KinalExpressCSS.css" text="Empleados de Empresa         " textFill="WHITE">
+               <styleClass>
+                  <String fx:value="button1" />
+                  <String fx:value="Button4" />
+               </styleClass>
+               <font>
+                  <Font name="Arial" size="19.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnProductos" layoutX="10.0" layoutY="145.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="289.0" stylesheets="@../resource/KinalExpressCSS.css" text="Tipo Producto Empresa          " textFill="WHITE">
+               <styleClass>
+                  <String fx:value="button1" />
+                  <String fx:value="Button4" />
+               </styleClass>
+               <font>
+                  <Font name="Arial" size="19.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnProveedor" layoutX="10.0" layoutY="190.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="289.0" stylesheets="@../resource/KinalExpressCSS.css" text="Proveedores de Empresa       " textFill="WHITE">
+               <styleClass>
+                  <String fx:value="button1" />
+                  <String fx:value="Button4" />
+               </styleClass>
+               <font>
+                  <Font name="Arial" size="19.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnEmailProveedor" layoutX="10.0" layoutY="235.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="289.0" stylesheets="@../resource/KinalExpressCSS.css" text="Email de Proveedores             " textFill="WHITE">
+               <styleClass>
+                  <String fx:value="button1" />
+                  <String fx:value="Button4" />
+               </styleClass>
+               <font>
+                  <Font name="Arial" size="19.0" />
+               </font>
+            </Button>
+            <Button layoutX="10.0" layoutY="280.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="289.0" stylesheets="@../resource/KinalExpressCSS.css" text="Telefonos de Proveedores      " textFill="WHITE">
+               <styleClass>
+                  <String fx:value="button1" />
+                  <String fx:value="Button4" />
+               </styleClass>
+               <font>
+                  <Font name="Arial" size="19.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnCompras" layoutX="10.0" layoutY="325.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="289.0" stylesheets="@../resource/KinalExpressCSS.css" text="Compas en la Empresa           " textFill="WHITE">
+               <styleClass>
+                  <String fx:value="button1" />
+                  <String fx:value="Button4" />
+               </styleClass>
+               <font>
+                  <Font name="Arial" size="19.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnProducto" layoutX="10.0" layoutY="370.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="289.0" stylesheets="@../resource/KinalExpressCSS.css" text="Productos de la Empresa        " textFill="WHITE">
+               <styleClass>
+                  <String fx:value="button1" />
+                  <String fx:value="Button4" />
+               </styleClass>
+               <font>
+                  <Font name="Arial" size="19.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnDetalleCompra" layoutX="10.0" layoutY="415.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="289.0" stylesheets="@../resource/KinalExpressCSS.css" text="Detalle Compra de Empresa   " textFill="WHITE">
+               <styleClass>
+                  <String fx:value="button1" />
+                  <String fx:value="Button4" />
+               </styleClass>
+               <font>
+                  <Font name="Arial" size="19.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnDetalleFactura" layoutX="10.0" layoutY="460.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="289.0" stylesheets="@../resource/KinalExpressCSS.css" text="Detalle Factura de Empresa    " textFill="WHITE">
+               <styleClass>
+                  <String fx:value="button1" />
+                  <String fx:value="Button4" />
+               </styleClass>
+               <font>
+                  <Font name="Arial" size="19.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnFactura" layoutX="10.0" layoutY="143.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="289.0" stylesheets="@../resource/KinalExpressCSS.css" text="Factura de Empresa                 " textFill="WHITE">
+               <styleClass>
+                  <String fx:value="button1" />
+                  <String fx:value="Button4" />
+               </styleClass>
+               <font>
+                  <Font name="Arial" size="19.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

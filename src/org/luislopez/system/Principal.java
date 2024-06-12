@@ -12,11 +12,13 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.luislopez.controller.DatePickerController;
+import org.luislopez.controller.MenuAdministracionController;
 import org.luislopez.controller.MenuCargoEmpleadoController;
 import org.luislopez.controller.MenuClientessController;
 import org.luislopez.controller.MenuComprasController;
 import org.luislopez.controller.MenuDetalleCompraController;
 import org.luislopez.controller.MenuDetalleFacturaController;
+import org.luislopez.controller.MenuEmailProveedorController;
 import org.luislopez.controller.MenuEmpleadoController;
 import org.luislopez.controller.MenuFacturaController;
 
@@ -74,7 +76,7 @@ public class Principal extends Application {
     
     public void menuPrincipalView(){
         try{
-            MenuPrincipalController menuPrincipalView=(MenuPrincipalController)cambiarEscena("KINALexpres.fxml",1120,620);
+            MenuPrincipalController menuPrincipalView=(MenuPrincipalController)cambiarEscena("KINALexpres.fxml",1507,841);
             menuPrincipalView.setEscenarioPrincipal(this);
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -84,17 +86,25 @@ public class Principal extends Application {
     
     public void menuClientessView(){
         try{
-            MenuClientessController menuClientessView=(MenuClientessController)cambiarEscena("MenuClientes.fxml",1120,620);
+            MenuClientessController menuClientessView=(MenuClientessController)cambiarEscena("MenuClientes.fxml",1507,841);
             menuClientessView.setEscenarioPrincipal(this);
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
     }
     
+    public void menuAdministracionView(){
+        try{
+            MenuAdministracionController menuAdministracionController=(MenuAdministracionController)cambiarEscena("MenuAdministracion.fxml",1507,841);
+            menuAdministracionController.setEscenarioPrincipal(this);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }    
     
     public void menuTipoProductoView(){
         try{
-            MenuTipoProductoController menuTipoProductoController=(MenuTipoProductoController)cambiarEscena("MenuTipoProducto.fxml",1120,620);
+            MenuTipoProductoController menuTipoProductoController=(MenuTipoProductoController)cambiarEscena("MenuTipoProducto.fxml",1507,841);
             menuTipoProductoController.setEscenarioPrincipal(this);
         }catch(Exception e){
             System.out.println(e.getMessage()); 
@@ -104,16 +114,25 @@ public class Principal extends Application {
     
     public void menuProveedorView(){
         try{
-            MenuProveedorController menuProveedorController=(MenuProveedorController)cambiarEscena("MenuProveedor.fxml",1120,620);
+            MenuProveedorController menuProveedorController=(MenuProveedorController)cambiarEscena("MenuProveedor.fxml",1507,841);
             menuProveedorController.setEscenarioPrincipal(this);
         }catch(Exception e){
             System.out.println(e.getMessage()); 
         }
     }   
     
+    public void menuEmailProveedorView(){
+        try{
+            MenuEmailProveedorController menuEmailProveedorController=(MenuEmailProveedorController)cambiarEscena("MenuEmailProveedor.fxml",1507,841);
+            menuEmailProveedorController.setEscenarioPrincipal(this);
+        }catch(Exception e){
+            System.out.println(e.getMessage()); 
+        }
+    }   
+        
     public void menuProductoView(){
         try{
-            MenuProductoController menuProductoController=(MenuProductoController)cambiarEscena("MenuProducto.fxml",1120,620);
+            MenuProductoController menuProductoController=(MenuProductoController)cambiarEscena("MenuProducto.fxml",1507,841);
             menuProductoController.setEscenarioPrincipal(this);
         }catch(Exception e){
             System.out.println(e.getMessage()); 
@@ -123,7 +142,7 @@ public class Principal extends Application {
     
     public void menuComprasView(){
         try{
-            MenuComprasController menuComprasController=(MenuComprasController)cambiarEscena("MenuCompras.fxml",1120,620);
+            MenuComprasController menuComprasController=(MenuComprasController)cambiarEscena("MenuCompras.fxml",1507,841);
             menuComprasController.setEscenarioPrincipal(this);
         }catch(Exception e){
             System.out.println(e.getMessage()); 
@@ -132,7 +151,7 @@ public class Principal extends Application {
     
     public void menuCargoEmpleadoView(){
         try{
-            MenuCargoEmpleadoController menuCargoEmpleadoController=(MenuCargoEmpleadoController)cambiarEscena("MenuCargoEmpleado.fxml",1120,620);
+            MenuCargoEmpleadoController menuCargoEmpleadoController=(MenuCargoEmpleadoController)cambiarEscena("MenuCargoEmpleado.fxml",1507,841);
             menuCargoEmpleadoController.setEscenarioPrincipal(this);
         }catch(Exception e){
             System.out.println(e.getMessage()); 
@@ -142,7 +161,7 @@ public class Principal extends Application {
     
     public void menuFacturaView(){
         try{
-            MenuFacturaController menuFacturaController=(MenuFacturaController)cambiarEscena("MenuFactura.fxml",1120,620);
+            MenuFacturaController menuFacturaController=(MenuFacturaController)cambiarEscena("MenuFactura.fxml",1507,841);
             menuFacturaController.setEscenarioPrincipal(this);
         }catch(Exception e){
             System.out.println(e.getMessage()); 
@@ -152,7 +171,7 @@ public class Principal extends Application {
     
     public void menuDetalleFacturaView(){
         try{
-            MenuDetalleFacturaController menuDetalleFacturaController=(MenuDetalleFacturaController)cambiarEscena("MenuDetalleFactura.fxml",1120,620);
+            MenuDetalleFacturaController menuDetalleFacturaController=(MenuDetalleFacturaController)cambiarEscena("MenuDetalleFactura.fxml",1507,841);
             menuDetalleFacturaController.setEscenarioPrincipal(this);
         }catch(Exception e){
             System.out.println(e.getMessage()); 
@@ -162,7 +181,7 @@ public class Principal extends Application {
     
     public void menuDetalleCompraView(){
         try{
-            MenuDetalleCompraController menuDetalleCompraController=(MenuDetalleCompraController)cambiarEscena("MenuDetalleCompra.fxml",1120,620);
+            MenuDetalleCompraController menuDetalleCompraController=(MenuDetalleCompraController)cambiarEscena("MenuDetalleCompra.fxml",1507,841);
             menuDetalleCompraController.setEscenarioPrincipal(this);
         }catch(Exception e){
             System.out.println(e.getMessage()); 
@@ -172,7 +191,7 @@ public class Principal extends Application {
     
     public void menuEmpleadoView(){
         try{
-            MenuEmpleadoController menuEmpleadoController=(MenuEmpleadoController)cambiarEscena("MenuEmpleado.fxml",1120,620);
+            MenuEmpleadoController menuEmpleadoController=(MenuEmpleadoController)cambiarEscena("MenuEmpleado.fxml",1507,841);
             menuEmpleadoController.setEscenarioPrincipal(this);
         }catch(Exception e){
             System.out.println(e.getMessage()); 
@@ -182,7 +201,7 @@ public class Principal extends Application {
     
     public void datePickerView(){
         try{
-            DatePickerController datePickerController=(DatePickerController)cambiarEscena("DatePicker.fxml",1120,620);
+            DatePickerController datePickerController=(DatePickerController)cambiarEscena("DatePicker.fxml",1507,841);
             datePickerController.setEscenarioPrincipal(this);
         }catch(Exception e){
             System.out.println(e.getMessage()); 
@@ -192,7 +211,7 @@ public class Principal extends Application {
     
     public void programadorView(){
         try{
-            ProgramadoController programadoController=(ProgramadoController)cambiarEscena("Programado.fxml",1120,620);
+            ProgramadoController programadoController=(ProgramadoController)cambiarEscena("Programado.fxml",1507,841);
             programadoController.setEscenarioPrincipal(this);
         }catch(Exception e){
             System.out.println(e.getMessage()); 

@@ -1,82 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="635.0" prefWidth="1124.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.luislopez.controller.MenuPrincipalController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="852.0" prefWidth="1516.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.luislopez.controller.MenuPrincipalController">
    <children>
-      <ImageView fitHeight="643.0" fitWidth="1135.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="859.0" fitWidth="1526.0" layoutX="-7.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../imagenes/PrincipalMenu.png" />
+            <Image url="@../imagenes/Principal%20KInal%20Expreso.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="593.0" fitWidth="684.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../imagenes/bolsa-de-la-compra.png" />
-         </image>
-      </ImageView>
-      <MenuBar layoutX="662.0" layoutY="6.0" prefHeight="78.0" prefWidth="462.0" styleClass="menubar" stylesheets="@../resource/KinalExpressCSS.css">
-        <menus>
-          <Menu mnemonicParsing="false" text="Modulos">
-            <items>
-              <MenuItem fx:id="btnMenuClientes" mnemonicParsing="false" onAction="#handleButtonAction" text="Clientes" />
-                  <MenuItem fx:id="btnProductos" mnemonicParsing="false" onAction="#handleButtonAction" text="Tipo Productos" />
-                  <MenuItem fx:id="btnProveedor" mnemonicParsing="false" onAction="#handleButtonAction" text="Proveedores" />
-                  <MenuItem fx:id="btnCompras" mnemonicParsing="false" onAction="#handleButtonAction" text="Compras" />
-                  <MenuItem fx:id="btnCargoEmpleado" mnemonicParsing="false" onAction="#handleButtonAction" text="Cargo de Empleados" />
-                  <MenuItem fx:id="btnFecha" mnemonicParsing="false" onAction="#handleButtonAction" text="Fecha" />
-                  <MenuItem fx:id="btnProducto" mnemonicParsing="false" onAction="#handleButtonAction" text="Producto" />
-                  <MenuItem fx:id="btnEmpleado" mnemonicParsing="false" onAction="#handleButtonAction" text="Empleado" />
-                  <MenuItem fx:id="btnFactura" mnemonicParsing="false" onAction="#handleButtonAction" text="Factura" />
-                  <MenuItem fx:id="btnDetalleFactura" mnemonicParsing="false" onAction="#handleButtonAction" text="Detalle Factura" />
-                  <MenuItem fx:id="btnDetalleCompra" mnemonicParsing="false" onAction="#handleButtonAction" text="Detalle Compra" />
-            </items>
-               <graphic>
-                  <ImageView fitHeight="70.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../imagenes/file-cabinet_2098286.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Reportes">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Compra y Venta" />
-                  <MenuItem mnemonicParsing="false" text="Salarios" />
-            </items>
-               <graphic>
-                  <ImageView fitHeight="68.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../imagenes/stamp_2098258.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Acerca de">
-            <items>
-              <MenuItem fx:id="btnProgramador" mnemonicParsing="false" onAction="#handleButtonAction" text="Programados" />
-                  <MenuItem mnemonicParsing="false" text="Hel Me" />
-            </items>
-               <graphic>
-                  <ImageView fitHeight="88.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../imagenes/programmer_560216.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-          </Menu>
-        </menus>
-      </MenuBar>
-      <Label layoutX="507.0" layoutY="279.0" text="KINAL EXPRES">
+      <Button fx:id="btnAdministracion" layoutX="226.0" layoutY="538.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="91.0" prefWidth="355.0" stylesheets="@../resource/KinalExpressCSS.css" text="Administracion" textFill="#fffefe">
+         <graphic>
+            <ImageView fitHeight="74.0" fitWidth="93.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagenes/CariitoCompra.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <styleClass>
+            <String fx:value="button1" />
+            <String fx:value="Button" />
+         </styleClass>
          <font>
-            <Font size="96.0" />
+            <Font size="19.0" />
          </font>
-      </Label>
+      </Button>
+      <Button layoutX="581.0" layoutY="538.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="355.0" stylesheets="@../resource/KinalExpressCSS.css" text="Logins                " textFill="WHITE">
+         <graphic>
+            <ImageView fitHeight="74.0" fitWidth="93.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagenes/nuevo-usuario.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <styleClass>
+            <String fx:value="button1" />
+            <String fx:value="Button" />
+         </styleClass>
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Button>
+      <Button layoutX="936.0" layoutY="538.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="355.0" stylesheets="@../resource/KinalExpressCSS.css" text="Salir                   " textFill="WHITE">
+         <graphic>
+            <ImageView fitHeight="71.0" fitWidth="104.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagenes/salida.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <styleClass>
+            <String fx:value="button1" />
+            <String fx:value="Button" />
+         </styleClass>
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

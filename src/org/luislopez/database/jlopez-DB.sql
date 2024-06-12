@@ -7,8 +7,6 @@ use DBKinalExpessIN5BM;
 
 set global time_zone='-6:00';
 
-
-
 create table Clientes(
 	clienteID int auto_increment,
     nombreClientes varchar (50),
@@ -63,8 +61,8 @@ create table Productos(
 	codigoTipoProducto int,
 	codigoProveedor int,
 	primary key  PK_codigoProducto (codigoProducto),
-	foreign key (codigoTipoProducto) references TipoProducto(codigoTipoProducto),
-	foreign key (codigoProveedor) references Proveedores(codigoProveedor)
+	foreign key (codigoTipoProducto) references TipoProducto(codigoTipoProducto)on delete cascade,
+	foreign key (codigoProveedor) references Proveedores(codigoProveedor)on delete cascade
 );
 
 create table DetalleCompra(
@@ -74,8 +72,8 @@ create table DetalleCompra(
 	codigoProducto int,
 	numeroDocumento int,
 	primary key PK_codigoDetalleCompra (codigoDetalleCompra),
-	foreign key (codigoProducto) REFERENCES Productos(codigoProducto),
-	foreign key (numeroDocumento) REFERENCES Compras(numeroDocumento)
+	foreign key (codigoProducto) REFERENCES Productos(codigoProducto)on delete cascade,
+	foreign key (numeroDocumento) REFERENCES Compras(numeroDocumento)on delete cascade
 );
 
 create table Empleados(
@@ -87,7 +85,7 @@ create table Empleados(
 	turno varchar(15),
 	codigoCargoEmpleado int,
 	primary key PK_codigoEmpleado (codigoEmpleado),
-	foreign key (codigoCargoEmpleado) REFERENCES CargoEmpleado(codigoCargoEmpleado)
+	foreign key (codigoCargoEmpleado) REFERENCES CargoEmpleado(codigoCargoEmpleado)on delete cascade
 );
 
 create table Factura(
@@ -98,8 +96,9 @@ create table Factura(
 	clienteID int,
 	codigoEmpleado int,
 	primary key PK_numeroDeFactura (numeroDeFactura),
-	foreign key (clienteID) REFERENCES Clientes(clienteID),
-	foreign key (codigoEmpleado) REFERENCES Empleados(codigoEmpleado)
+	foreign key (clienteID) REFERENCES Clientes(clienteID) on delete cascade ,
+	foreign key (codigoEmpleado) REFERENCES Empleados(codigoEmpleado) on delete cascade 
+
 );
 
 CREATE TABLE DetalleFactura(
@@ -109,51 +108,19 @@ CREATE TABLE DetalleFactura(
 	numeroDeFactura int,
 	codigoProducto int,
 	primary key PK_codigoDetalleFactura (codigoDetalleFactura),
-	foreign key (numeroDeFactura) REFERENCES Factura(numeroDeFactura),
-	foreign key (codigoProducto) REFERENCES Productos(codigoProducto)
+	foreign key (numeroDeFactura) REFERENCES Factura(numeroDeFactura) on delete cascade ,
+	foreign key (codigoProducto) REFERENCES Productos(codigoProducto)on delete cascade 
 );
 
+create table EmailProveedor(
+	codigoEmailProveedor int auto_increment,
+    emailProveedor varchar(50),
+    descripcion varchar(100),
+    codigoProveedor int,
+    primary key PK_codigoEmailProveedor (codigoEmailProveedor),
+    foreign key (codigoProveedor) references Proveedores(codigoProveedor) on delete cascade 
 
--- Triggers que eliminan registros relacionados antes de borrar registros principales.
-
-Delimiter $$
-	create trigger tr_EliminarProductos
-	before delete on Productos
-	for each row
-	begin
-    
-		DELETE FROM DetalleFactura WHERE codigoProducto = OLD.codigoProducto;
-		DELETE FROM DetalleCompra WHERE codigoProducto = OLD.codigoProducto;
-	end$$
-
-	create trigger tr_EliminarFactura
-	before delete on Factura
-	for each row
-	begin
-		DELETE FROM DetalleFactura WHERE numeroDeFactura = OLD.numeroDeFactura;
-	end$$
-
-	create trigger tr_EliminarEmpleado
-	before delete on Empleados
-	for each row
-	begin
-		DELETE FROM Factura WHERE codigoEmpleado = OLD.codigoEmpleado;
-	end$$
-
-	create trigger tr_EliminarCompras
-	before delete on Compras
-	for each row
-	begin
-		DELETE FROM DetalleCompra WHERE numeroDocumento = OLD.numeroDocumento;
-	end$$
-
-	create trigger tr_EliminarCargoEmpleado
-	before delete on CargoEmpleado
-	for each row
-	begin
-		DELETE FROM Empleados WHERE codigoCargoEmpleado = OLD.codigoCargoEmpleado;
-	end$$
-Delimiter ;
+);
 
 
 
@@ -214,7 +181,6 @@ begin
 end$$
 delimiter ;
 
-call sp_ActualizarClientes(1,'Daniela García', 'Martínez', 'zona 16', '5432109543', '67890123', 'daniela@gmail.com');
 -- ------------------------------------------------------------------------------- LISTA --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -293,7 +259,6 @@ begin
 end$$
 delimiter ;
 
-call sp_ActualizarTipoProducto(1,'Robot Aspirador CleanBot: Limpieza automática, navegación inteligente, eficiente.');
 -- ------------------------------------------------------------------------------- LISTA --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -372,7 +337,6 @@ begin
 end$$
 delimiter ;
 
-CALL sp_ActualizarProveedores(1,'8889990001112', 'Torres', 'Miguel', 'zona 35', 'Torres Servicios de Mantenimiento, S.L.', '45678901','https://www.google.com');
 -- ------------------------------------------------------------------------------- LISTA --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -414,18 +378,6 @@ begin
 		values (echaDocumento,escripcion,otalDocumento);
 end $$        
 delimiter ;
-call sp_AgregarCompras('2020-06-12','2 Camisetas de algodón, 1 Pantalón de mezclilla, 1 Par de zapatos deportivos, 1 Mochila resistente.',199.88);
-call sp_AgregarCompras('2021-07-17','1 Conjunto de pijama de franela, 1 Bata de baño suave, 1 Par de pantuflas cómodas.',99.99);
-call sp_AgregarCompras('2021-06-30','2 Blusas de moda, 1 Falda plisada, 1 Collar de perlas.',149.50);
-call sp_AgregarCompras('2021-04-18','1 Camiseta de algodón orgánico, 1 Pantalón de yoga, 1 Tapete de yoga antideslizante.',79.99);
-call sp_AgregarCompras('2021-02-13','1 Vestido de noche elegante, 1 Bolso de fiesta, 1 Par de tacones altos.',199.99);
-call sp_AgregarCompras('2020-12-09','1 Set de cocina de acero inoxidable, 1 Juego de cuchillos profesionales, 1 Tabla de cortar de bambú.',129.95);
-call sp_AgregarCompras('2020-06-12', '2 Camisetas de algodón, 1 Pantalón de mezclilla, 1 Par de zapatos deportivos, 1 Mochila resistente.', 199.88);
-call sp_AgregarCompras('2021-07-17', '1 Conjunto de pijama de franela, 1 Bata de baño suave, 1 Par de pantuflas cómodas.', 99.99);
-call sp_AgregarCompras('2021-06-30', '2 Blusas de moda, 1 Falda plisada, 1 Collar de perlas.', 149.50);
-call sp_AgregarCompras('2021-04-18', '1 Camiseta de algodón orgánico, 1 Pantalón de yoga, 1 Tapete de yoga antideslizante.', 79.99);
-call sp_AgregarCompras('2021-02-13', '1 Vestido de noche elegante, 1 Bolso de fiesta, 1 Par de tacones altos.', 199.99);
-call sp_AgregarCompras('2020-12-09', '1 Set de cocina de acero inoxidable, 1 Juego de cuchillos profesionales, 1 Tabla de cortar de bambú.', 129.95);
 
 
 -- ------------------------------------------------------------------------------- ELIMINAR --------------------------------------------------------------------------------------------------------
@@ -437,7 +389,6 @@ begin
     where Compras.numeroDocumento = umeroDocumento;
 end$$
 delimiter ;
-call sp_EliminarCompras ('12');
 -- ------------------------------------------------------------------------------- EDITAR --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 delimiter $$
@@ -454,7 +405,24 @@ begin
 end$$
 delimiter ;
 
-call sp_ActualizarCompras(1,'2020-06-12','Mima a tu mascota con una variedad de alimentos y juguetes en PetParadise',100.45);
+
+delimiter $$
+create procedure sp_actualizarComprasTotal(in numDoc int,in total decimal(10,2))
+begin
+	update Compras 
+	set 
+		Compras.totalDocumento=total
+    where
+		Compras.numeroDocumento=numDoc;
+end $$
+delimiter ;
+
+
+
+
+
+
+
 -- ------------------------------------------------------------------------------- LISTA --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -469,7 +437,6 @@ begin
     from compras o;
 end $$        
 delimiter ;
-call sp_MostrarCompras;
 -- ------------------------------------------------------------------------------- Buscar --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 delimiter $$
@@ -478,7 +445,6 @@ begin
   select *from Compras where Compras.numeroDocumento = umeroDocumento;
 end$$ 
 delimiter ;
-call sp_BuscarCompras(1);
 
 -- ------------------------------------------------------------------------------- Cargo de Empleado --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -530,7 +496,6 @@ begin
 end$$
 delimiter ;
 
-call sp_ActualizarCargoEmpleado(1,'Coordinador de Eventos','Planifica, coordina eventos, gestiona logística.');
 -- ------------------------------------------------------------------------------- LISTA --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -570,17 +535,6 @@ begin
 end$$
 DELIMITER ;
 
-CALL sp_agregarProducto( 'Arroz', 5.99, 68.99, 129.99, 100, 1, 1);
-CALL sp_agregarProducto( 'Frijoles', 3.49, 39.99, 74.99, 150, 2, 2);
-CALL sp_agregarProducto( 'Aceite', 8.99, 102.99, 194.99,  80, 3, 3);
-CALL sp_agregarProducto( 'Leche Entera', 2.99, 32.99, 62.99, 120, 4, 4);
-CALL sp_agregarProducto( 'Azúcar', 4.49, 51.99, 98.99, 90, 5, 5);
-CALL sp_agregarProducto( 'Harina', 3.99, 45.99, 89.99, 80, 6, 6);
-CALL sp_agregarProducto( 'Leche', 1.99, 20.99, 39.99, 100, 7, 7);
-CALL sp_agregarProducto( 'Arroz', 2.99, 35.99, 67.99, 120, 8, 8);
-CALL sp_agregarProducto( 'Frijoles', 3.49, 40.99, 78.99, 110, 9, 9);
-CALL sp_agregarProducto( 'Aceite', 4.99, 55.99, 108.99, 60, 10, 10);
-CALL sp_agregarProducto( 'Sal', 0.99, 10.99, 19.99, 200, 2, 3);
 
 -- ------------------------------------------------------------------------------- LISTA --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -622,7 +576,6 @@ begin
 end$$
 DELIMITER ;
 
-call sp_actualizarProducto(1, 'Pollo', 8.99, 69.99, 130.99, 100, 2, 2);
 
 -- ------------------------------------------------------------------------------- ELIMINAR --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -649,6 +602,38 @@ end$$
 delimiter ;
 call sp_BuscarProductos(1);
 
+delimiter $$
+create procedure sp_actualizarPreciosProductos(in codProd varchar(15),in precUnit decimal(10,2),in precDoc decimal(10,5), in precMay decimal(10,2), in exist int)
+begin
+	update Productos 
+	set 
+		Productos.precioUnitario=precUnit,
+		Productos.precioDocena=precDoc,
+        Productos.precioMayor=precMay,
+        Productos.existencia=exist
+    where
+		Productos.codigoProducto=codProd;
+end $$
+delimiter ;
+
+
+CREATE VIEW vw_listarRelaciones AS
+SELECT
+    Productos.codigoProducto AS codigoProducto,
+    Productos.descripcionProducto AS Descripcion,
+    Productos.precioUnitario AS precioUnitario,
+    Productos.precioDocena AS precioDocena,
+    Productos.precioMayor AS precioMayor,
+    Productos.existencia AS existencia,
+    TipoProducto.descripcionProducto AS codigoTipoProducto,
+    Proveedores.nombresProveedor AS codigoProveedor
+FROM Productos
+INNER JOIN TipoProducto ON Productos.codigoTipoProducto = TipoProducto.codigoTipoProducto
+INNER JOIN Proveedores ON Productos.codigoProveedor = Proveedores.codigoProveedor;
+
+select*from vw_listarRelaciones;
+
+
 
 
 -- ------------------------------------------------------------------------------- DetalleCompra --------------------------------------------------------------------------------------------------------
@@ -664,16 +649,6 @@ BEGIN
     VALUES( p_costoUnitario, p_cantidad, p_codigoProducto, p_numeroDocumento);
 END$$
 delimiter ;
-CALL sp_AgregarDetalleCompra(23.45, 34, 1, 1);
-CALL sp_AgregarDetalleCompra(17.89, 22, 2, 2);
-CALL sp_AgregarDetalleCompra(10.67, 45, 3, 3);
-CALL sp_AgregarDetalleCompra(35.60, 18, 4, 4);
-CALL sp_AgregarDetalleCompra(28.75, 39, 5, 5);
-CALL sp_AgregarDetalleCompra(19.99, 27, 6, 6);
-CALL sp_AgregarDetalleCompra(42.30, 31, 7, 7);
-CALL sp_AgregarDetalleCompra(15.50, 14, 8, 8);
-CALL sp_AgregarDetalleCompra(29.75, 26, 9, 9);
-CALL sp_AgregarDetalleCompra(38.20, 19, 10, 10);
 
 
 
@@ -705,7 +680,6 @@ begin
 end$$
 delimiter ;
 
-call sp_ActualizarDetalleCompra(1,23.45, 34, 2, 2);
 -- ------------------------------------------------------------------------------- LISTA --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -731,6 +705,18 @@ begin
 end$$ 
 delimiter ;
 call sp_BuscarDetalleCompra(1);
+
+
+
+-- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
 
 -- ------------------------------------------------------------------------------- Empleado --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -783,7 +769,6 @@ begin
 end$$
 delimiter ;
 
-call sp_ActualizarEmpleados(1,'Ana Maria', 'Gomez Perez', 190.75, 'zona 4', 'Segundo turno', 2);
 -- ------------------------------------------------------------------------------- LISTA --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -826,15 +811,6 @@ BEGIN
 END$$
 delimiter ;
 
-CALL sp_AgregarFactura('Pendiente', 4125.00, '2024-05-10', 1, 1);
-CALL sp_AgregarFactura('Pagada', 2500.50, '2024-04-15', 2, 2);
-CALL sp_AgregarFactura('Pendiente', 3750.75, '2024-05-05', 3, 3);
-CALL sp_AgregarFactura('Parcialmente Pagada', 1800.00, '2024-05-12', 4, 4);
-CALL sp_AgregarFactura('Cancelada', 3200.00, '2024-05-01', 5, 5);
-CALL sp_AgregarFactura('Pendiente', 4150.25, '2024-05-20', 6, 6);
-CALL sp_AgregarFactura('Pagada', 5000.00, '2024-05-08', 7, 7);
-CALL sp_AgregarFactura('Pendiente', 2750.40, '2024-05-15', 8, 8);
-CALL sp_AgregarFactura('Parcialmente Pagada', 2100.00, '2024-04-28', 9, 9);
 
 -- ------------------------------------------------------------------------------- ELIMINAR --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -861,7 +837,17 @@ begin
 end$$
 delimiter ;
 
-call sp_ActualizarFactura(1,'Parcialmente Pagada ', 234.56, '2020-12-09', 1, 1);
+delimiter $$
+create procedure sp_actualizarFacturaTotal(in numFac int,in total decimal(10,2))
+begin
+	update Factura 
+	set 
+		Factura.totalFactura=total
+    where
+		Factura.numeroDeFactura=numFac;
+end $$
+delimiter ;
+
 -- ------------------------------------------------------------------------------- LISTA --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -903,15 +889,6 @@ BEGIN
 END$$
 delimiter ;
 
-CALL sp_AgregarDetalleFactura(123.00, 234, 1, 1);
-CALL sp_AgregarDetalleFactura(150.00, 235, 2, 2);
-CALL sp_AgregarDetalleFactura(300.75, 236, 3, 3);
-CALL sp_AgregarDetalleFactura(450.50, 237, 4, 4);
-CALL sp_AgregarDetalleFactura(200.00, 238, 5, 5);
-CALL sp_AgregarDetalleFactura(175.25, 239, 6, 6);
-CALL sp_AgregarDetalleFactura(225.00, 240, 7, 7);
-CALL sp_AgregarDetalleFactura(500.80, 241, 8, 8);
-CALL sp_AgregarDetalleFactura(350.60, 242, 9, 9);
 
 -- ------------------------------------------------------------------------------- ELIMINAR --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -937,7 +914,6 @@ begin
 end$$
 delimiter ;
 
-call sp_ActualizarDetalleFactura(1,23.55, 234, 1, 1);
 -- ------------------------------------------------------------------------------- LISTA --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -963,6 +939,202 @@ begin
 end$$ 
 delimiter ;
 call sp_BuscarDetalleFactura(1);
+
+
+
+
+
+
+
+-- ------------------------------------------------------------------------------- EmailProveedor --------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- ------------------------------------------------------------------------------- AGREGAR --------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+delimiter $$
+create procedure sp_AgregarEmailProveedor (in mailProveedor varchar(50),in escripcion varchar(100),in odigoProveedor int)
+begin
+	insert into EmailProveedor ( EmailProveedor.emailProveedor, EmailProveedor.descripcion, EmailProveedor.codigoProveedor)
+		values (mailProveedor,escripcion,odigoProveedor);
+end $$        
+delimiter ;
+call sp_AgregarEmailProveedor('Luis@gmail.com','Correo de Proveedor Activo',1);
+call sp_AgregarEmailProveedor('Maria@yahoo.com','Correo de Proveedor Activo',2);
+call sp_AgregarEmailProveedor('Pedro@hotmail.com','Correo de Proveedor Activo',3);
+call sp_AgregarEmailProveedor('Ana@outlook.com','Correo de Proveedor Activo',4);
+call sp_AgregarEmailProveedor('Carlos@gmail.com','Correo de Proveedor Activo',5);
+call sp_AgregarEmailProveedor('Sofia@yahoo.com','Correo de Proveedor Activo',6);
+call sp_AgregarEmailProveedor('Juan@hotmail.com','Correo de Proveedor Inactivo',7);
+call sp_AgregarEmailProveedor('Laura@outlook.com','Correo de Proveedor Activo',8);
+call sp_AgregarEmailProveedor('Diego@gmail.com','Correo de Proveedor Activo',9);
+call sp_AgregarEmailProveedor('Elena@yahoo.com','Correo de Proveedor Activo',10);
+call sp_AgregarEmailProveedor('Roberto@hotmail.com','Correo de Proveedor Inactivo',11);
+
+-- ------------------------------------------------------------------------------- ELIMINAR --------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+delimiter $$
+create procedure sp_EliminarEmailProveedor(in odigoEmailProveedor int)
+begin
+    delete from EmailProveedor
+    where EmailProveedor.codigoEmailProveedor = odigoEmailProveedor;
+end$$
+delimiter ;
+call sp_EliminarEmailProveedor ('11');
+-- ------------------------------------------------------------------------------- EDITAR --------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+delimiter $$
+create procedure sp_ActualizarEmailProveedor(in  odigoEmailProveedor int ,in mailProveedor varchar(50),in escripcion varchar(100),in odigoProveedor int)
+begin
+    update EmailProveedor
+    set 
+        EmailProveedor.emailProveedor =  mailProveedor ,
+        EmailProveedor.descripcion = escripcion,
+        EmailProveedor.codigoProveedor = odigoProveedor
+        where
+        EmailProveedor.codigoEmailProveedor = odigoEmailProveedor;
+end$$
+delimiter ;
+
+-- ------------------------------------------------------------------------------- LISTA --------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+delimiter $$
+create procedure sp_MostrarEmailProveedor()
+begin 
+	select
+	e.codigoEmailProveedor ,
+	e.emailProveedor  ,
+	e.descripcion ,
+	e.codigoProveedor 
+    from emailProveedor e;
+end $$        
+delimiter ;
+call sp_MostrarEmailProveedor;
+-- ------------------------------------------------------------------------------- Buscar --------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+delimiter $$
+create procedure sp_BuscarEmailProveedor(in odigoEmailProveedor int)
+begin 
+  select *from EmailProveedor where EmailProveedor.codigoEmailProveedor = odigoEmailProveedor;
+end$$ 
+delimiter ;
+call sp_BuscarEmailProveedor(1);
+
+
+-- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+delimiter //
+create function fn_TraerPrecioUnitario(p_codigoProducto varchar(15)) returns decimal(10,2)
+deterministic
+begin
+	declare precio decimal(10,2);
+	set precio= (select DetalleCompra.costoUnitario from DetalleCompra
+    where DetalleCompra.codigoProducto=p_codigoProducto);
+	return precio;
+end //
+
+delimiter ;
+
+
+
+
+delimiter //
+create trigger tr_insertarPreciosDetalleFactura_Before_Insert
+before insert on DetalleFactura
+for each row
+	begin
+		declare total decimal(10,2);
+		
+                set new.precioUnitario= (select precioUnitario from Productos
+					where Productos.codigoProducto=new.codigoProducto);
+        
+	end //
+delimiter ;
+
+
+delimiter //
+create trigger tr_insertarPreciosProductos_after_Insert
+after insert on DetalleCompra
+for each row
+	begin
+    call sp_actualizarPreciosProductos(new.codigoProducto, 
+									(fn_TraerPrecioUnitario(new.codigoProducto)+(fn_TraerPrecioUnitario(new.codigoProducto)*0.40)),
+									(fn_TraerPrecioUnitario(new.codigoProducto)+(fn_TraerPrecioUnitario(new.codigoProducto)*0.35)),
+                                    (fn_TraerPrecioUnitario(new.codigoProducto)+(fn_TraerPrecioUnitario(new.codigoProducto)*0.25)),
+                                    new.cantidad);
+                                    
+	end //
+delimiter ;
+
+
+delimiter //
+create trigger tr_insertarTotalCompra_Before_Insert
+after insert on DetalleCompra
+for each row
+	begin
+    declare total decimal(10,2);
+    
+    set total=((select sum(costoUnitario*cantidad) from DetalleCompra where DetalleCompra.numeroDocumento=new.numeroDocumento));
+    
+    call sp_actualizarComprasTotal(new.numeroDocumento, total);
+                                    
+	end //
+delimiter ;
+
+delimiter //
+create trigger tr_insertarTotalFactura_Before_Insert
+after insert on DetalleFactura
+for each row
+	begin
+    declare total decimal(10,2);
+    
+    set total=((select sum(precioUnitario*cantidad) from DetalleFactura where DetalleFactura.numeroDeFactura=new.numeroDeFactura ));
+    
+    call sp_actualizarFacturaTotal(new.numeroDeFactura, total);
+                                    
+	end //
+delimiter ;
+
+Alter user 'root'@'localhost' identified with mysql_native_password by 'ema22';
+
+select * from Clientes;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

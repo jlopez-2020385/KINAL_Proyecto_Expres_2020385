@@ -4,6 +4,8 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,6 +22,7 @@ import javafx.scene.image.ImageView;
 import javax.swing.JOptionPane;
 import org.luislopez.bean.Clientes;
 import org.luislopez.db.Conexion;
+import org.luislopez.report.GenerarReportes;
 import org.luislopez.system.Principal;
 
 /**
@@ -37,8 +40,20 @@ public class MenuClientessController implements Initializable {
     }
     private operaciones tipoDeoperaciones = operaciones.NINGUNO;
 
-    @FXML
-    private Button btnRegresar;
+        @FXML private Button btnRegresar;
+        @FXML private Button btnMenuClientes;
+        @FXML private Button btnProgramador; 
+        @FXML private Button btnProductos;
+        @FXML private Button btnProveedor;
+        @FXML private Button btnCompras;    
+        @FXML private Button btnCargoEmpleado;   
+        @FXML private Button btnProducto;    
+        @FXML private Button btnEmpleado;     
+        @FXML private Button btnFactura;    
+        @FXML private Button btnDetalleFactura;    
+        @FXML private Button btnDetalleCompra;    
+        @FXML private Button btnFecha;    
+        @FXML private Button btnEmailProveedor; 
     @FXML
     private TextField txtCodigoC;
     @FXML
@@ -286,6 +301,18 @@ public class MenuClientessController implements Initializable {
     /**
      * Método para actualizar 
      */
+    
+    public void imprimirReporte(){
+        Map parametros = new HashMap();
+        parametros.put("clienteID",null);
+        GenerarReportes.mostrarReportes("ReporteKinalExpress.jasper", "Reporte de Clientes", parametros);
+        
+    }
+    
+    
+    
+    
+    
         
     public void actualizar(){
         try{
@@ -316,6 +343,10 @@ public class MenuClientessController implements Initializable {
     
     public void reportes(){
         switch(tipoDeoperaciones){
+            case NINGUNO :
+                imprimirReporte();
+                break;
+                
             case ACTUALIZAR:
                 desactivarControles();
                 limpiarControlers();                
@@ -363,9 +394,34 @@ public class MenuClientessController implements Initializable {
 
     @FXML
     public void handleButtonAction(ActionEvent event) {
-        if (event.getSource() == btnRegresar) {
-            escenarioPrincipal.menuPrincipalView();
-        }
+        if (event.getSource() == btnRegresar){
+        escenarioPrincipal.menuPrincipalView();
+        }if(event.getSource()==btnMenuClientes){
+            escenarioPrincipal.menuClientessView();
+        }if(event.getSource() == btnProgramador){
+            escenarioPrincipal.programadorView(); 
+        }if(event.getSource() == btnProductos){
+            escenarioPrincipal.menuTipoProductoView();   
+        }if(event.getSource() == btnProveedor){
+            escenarioPrincipal.menuProveedorView();         
+        }if(event.getSource() == btnCompras){
+            escenarioPrincipal.menuComprasView();
+        }if(event.getSource() == btnCargoEmpleado){
+            escenarioPrincipal.menuCargoEmpleadoView();    
+        }if(event.getSource() == btnFecha){
+            escenarioPrincipal.datePickerView();        
+        }if(event.getSource() == btnProducto){
+            escenarioPrincipal.menuProductoView();
+        }if(event.getSource() == btnEmpleado){
+            escenarioPrincipal.menuEmpleadoView();
+        }if(event.getSource() == btnFactura){
+            escenarioPrincipal.menuFacturaView();   
+        }if(event.getSource() == btnDetalleFactura){
+            escenarioPrincipal.menuDetalleFacturaView();         
+        }if(event.getSource() == btnDetalleCompra){
+            escenarioPrincipal.menuDetalleCompraView();   
+        }if(event.getSource() == btnEmailProveedor)
+            escenarioPrincipal.menuEmailProveedorView();             
     }
 
     public void setEscenarioPrincipal(Principal escenarioPrincipal) {

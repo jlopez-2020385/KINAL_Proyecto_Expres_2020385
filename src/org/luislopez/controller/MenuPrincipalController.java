@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import org.luislopez.system.Principal; 
 
@@ -31,7 +32,7 @@ public class MenuPrincipalController  implements Initializable{
     @FXML MenuItem btnDetalleFactura;    
     @FXML MenuItem btnDetalleCompra;    
     @FXML MenuItem btnFecha;    
-    
+    @FXML Button btnAdministracion;    
     
  
     @Override
@@ -49,32 +50,15 @@ public class MenuPrincipalController  implements Initializable{
     
     @FXML
     public void handleButtonAction(ActionEvent event){
-        if(event.getSource()==btnMenuClientes){
-            escenarioPrincipal.menuClientessView();
-        }if(event.getSource() == btnProgramador){
-            escenarioPrincipal.programadorView(); 
-        }if(event.getSource() == btnProductos){
-            escenarioPrincipal.menuTipoProductoView();   
-        }if(event.getSource() == btnProveedor){
-            escenarioPrincipal.menuProveedorView();         
-        }if(event.getSource() == btnCompras){
-            escenarioPrincipal.menuComprasView();
-        }if(event.getSource() == btnCargoEmpleado){
-            escenarioPrincipal.menuCargoEmpleadoView();    
-        }if(event.getSource() == btnFecha){
-            escenarioPrincipal.datePickerView();        
-        }if(event.getSource() == btnProducto){
-            escenarioPrincipal.menuProductoView();
-        }if(event.getSource() == btnEmpleado){
-            escenarioPrincipal.menuEmpleadoView();
-        }if(event.getSource() == btnFactura){
-            escenarioPrincipal.menuFacturaView();   
-        }if(event.getSource() == btnDetalleFactura){
-            escenarioPrincipal.menuDetalleFacturaView();         
-        }if(event.getSource() == btnDetalleCompra)
-            escenarioPrincipal.menuDetalleCompraView();          
-        
+        if(event.getSource() == btnAdministracion)
+            escenarioPrincipal.menuAdministracionView();          
         
     }
+    
+    
+    
+    
+    
+    
     
 }

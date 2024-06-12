@@ -43,6 +43,21 @@ public class MenuDetalleCompraController implements Initializable {
     private ObservableList <Productos> listaProductos;
     private ObservableList <Compras> listaCompras;
     
+        @FXML private Button btnRegresar;
+        @FXML private Button btnMenuClientes;
+        @FXML private Button btnProgramador; 
+        @FXML private Button btnProductos;
+        @FXML private Button btnProveedor;
+        @FXML private Button btnCompras;    
+        @FXML private Button btnCargoEmpleado;   
+        @FXML private Button btnProducto;    
+        @FXML private Button btnEmpleado;     
+        @FXML private Button btnFactura;    
+        @FXML private Button btnDetalleFactura;    
+        @FXML private Button btnDetalleCompra;    
+        @FXML private Button btnFecha;    
+        @FXML private Button btnEmailProveedor;     
+        
     @FXML private TextField txtCodigoDetalleCompra;
     @FXML private TextField txtCostoUnitario;
     @FXML private TextField txtCantidad;
@@ -54,7 +69,6 @@ public class MenuDetalleCompraController implements Initializable {
     @FXML private TableColumn colCantidad;
     @FXML private TableColumn colCodigoProducto;
     @FXML private TableColumn colNumeroDocumento;
-    @FXML private Button btnRegresar;
     @FXML private Button btnAgregar;
     @FXML private Button btnEliminar;
     @FXML private Button btnEditar;
@@ -391,9 +405,34 @@ public class MenuDetalleCompraController implements Initializable {
     }
         
     public void handleButtonAction(ActionEvent event) {
-        if (event.getSource() == btnRegresar) {
-            escenarioPrincipal.menuPrincipalView();
-        }
+        if (event.getSource() == btnRegresar){
+        escenarioPrincipal.menuPrincipalView();
+        }if(event.getSource()==btnMenuClientes){
+            escenarioPrincipal.menuClientessView();
+        }if(event.getSource() == btnProgramador){
+            escenarioPrincipal.programadorView(); 
+        }if(event.getSource() == btnProductos){
+            escenarioPrincipal.menuTipoProductoView();   
+        }if(event.getSource() == btnProveedor){
+            escenarioPrincipal.menuProveedorView();         
+        }if(event.getSource() == btnCompras){
+            escenarioPrincipal.menuComprasView();
+        }if(event.getSource() == btnCargoEmpleado){
+            escenarioPrincipal.menuCargoEmpleadoView();    
+        }if(event.getSource() == btnFecha){
+            escenarioPrincipal.datePickerView();        
+        }if(event.getSource() == btnProducto){
+            escenarioPrincipal.menuProductoView();
+        }if(event.getSource() == btnEmpleado){
+            escenarioPrincipal.menuEmpleadoView();
+        }if(event.getSource() == btnFactura){
+            escenarioPrincipal.menuFacturaView();   
+        }if(event.getSource() == btnDetalleFactura){
+            escenarioPrincipal.menuDetalleFacturaView();         
+        }if(event.getSource() == btnDetalleCompra){
+            escenarioPrincipal.menuDetalleCompraView();   
+        }if(event.getSource() == btnEmailProveedor)
+            escenarioPrincipal.menuEmailProveedorView();  
     }
     
           public Principal getEscenarioPrincipal() {

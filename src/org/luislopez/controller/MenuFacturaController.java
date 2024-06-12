@@ -8,6 +8,8 @@ package org.luislopez.controller;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -17,12 +19,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javax.swing.JOptionPane;
 import org.luislopez.bean.Clientes;
+import org.luislopez.bean.Compras;
 import org.luislopez.bean.Empleado;
 import org.luislopez.bean.Factura;
 import org.luislopez.db.Conexion;
@@ -43,10 +47,25 @@ public class MenuFacturaController implements Initializable {
     private ObservableList <Clientes> listaClientes;  
     private ObservableList <Empleado> listaEmpleado;  
     
+        @FXML private Button btnRegresar;
+        @FXML private Button btnMenuClientes;
+        @FXML private Button btnProgramador; 
+        @FXML private Button btnProductos;
+        @FXML private Button btnProveedor;
+        @FXML private Button btnCompras;    
+        @FXML private Button btnCargoEmpleado;   
+        @FXML private Button btnProducto;    
+        @FXML private Button btnEmpleado;     
+        @FXML private Button btnFactura;    
+        @FXML private Button btnDetalleFactura;    
+        @FXML private Button btnDetalleCompra;    
+        @FXML private Button btnFecha;    
+        @FXML private Button btnEmailProveedor;     
+    
     @FXML private TextField txtNumeroDeFactura;
     @FXML private TextField txtEstado;
     @FXML private TextField txtTotalFactura;
-    @FXML private TextField txtFechaFactura;
+    @FXML private DatePicker txtFechaFactura;
     @FXML private ComboBox cmbCodigoclienteID;
     @FXML private ComboBox cmbCodigoEmpleado;
     @FXML private TableView tblFactura;
@@ -56,7 +75,6 @@ public class MenuFacturaController implements Initializable {
     @FXML private TableColumn colFechaFactura;
     @FXML private TableColumn colCodigoclienteID;
     @FXML private TableColumn colCodigoEmpleado;
-    @FXML private Button btnRegresar;
     @FXML private Button btnAgregar;
     @FXML private Button btnEliminar;
     @FXML private Button btnEditar;
@@ -85,7 +103,7 @@ public class MenuFacturaController implements Initializable {
        txtNumeroDeFactura.setText(String.valueOf(((Factura)tblFactura.getSelectionModel().getSelectedItem()).getNumeroDeFactura()));
        txtEstado.setText(((Factura)tblFactura.getSelectionModel().getSelectedItem()).getEstado());
        txtTotalFactura.setText(String.valueOf(((Factura)tblFactura.getSelectionModel().getSelectedItem()).getTotalFactura()));
-       txtFechaFactura.setText(((Factura)tblFactura.getSelectionModel().getSelectedItem()).getFechaFactura());
+       txtFechaFactura.setValue(LocalDate.parse(((Factura) tblFactura.getSelectionModel().getSelectedItem()).getFechaFactura()));
        cmbCodigoclienteID.getSelectionModel().select(buscarClientes(((Factura)tblFactura.getSelectionModel().getSelectedItem()).getClienteID())); 
        cmbCodigoEmpleado.getSelectionModel().select(buscarEmpleado(((Factura)tblFactura.getSelectionModel().getSelectedItem()).getCodigoEmpleado())); 
        
@@ -250,8 +268,7 @@ public class MenuFacturaController implements Initializable {
      public void guardar (){
          Factura registro = new Factura();
          registro.setEstado(txtEstado.getText());
-         registro.setTotalFactura(Double.parseDouble(txtTotalFactura.getText()));
-         registro.setFechaFactura(txtFechaFactura.getText());
+         registro.setFechaFactura(txtFechaFactura.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
          registro.setClienteID(((Clientes)cmbCodigoclienteID.getSelectionModel().getSelectedItem()).getClienteID());         
          registro.setCodigoEmpleado(((Empleado)cmbCodigoEmpleado.getSelectionModel().getSelectedItem()).getCodigoEmpleado());         
          
@@ -347,7 +364,7 @@ public class MenuFacturaController implements Initializable {
             
             registro.setEstado(txtEstado.getText());
             registro.setTotalFactura(Double.parseDouble(txtTotalFactura.getText()));
-            registro.setFechaFactura(txtFechaFactura.getText());
+            registro.setFechaFactura(txtFechaFactura.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
             registro.setClienteID(((Clientes)cmbCodigoclienteID.getSelectionModel().getSelectedItem()).getClienteID());         
             registro.setCodigoEmpleado(((Empleado)cmbCodigoEmpleado.getSelectionModel().getSelectedItem()).getCodigoEmpleado());         
          
@@ -407,16 +424,41 @@ public class MenuFacturaController implements Initializable {
         txtNumeroDeFactura.clear();
         txtEstado.clear();
         txtTotalFactura.clear();
-        txtFechaFactura.clear();
+        txtFechaFactura.setValue(null);
         cmbCodigoclienteID.getSelectionModel().getSelectedItem();
         cmbCodigoEmpleado.getSelectionModel().getSelectedItem();
     
     }
         
     public void handleButtonAction(ActionEvent event) {
-        if (event.getSource() == btnRegresar) {
-            escenarioPrincipal.menuPrincipalView();
-        }
+        if (event.getSource() == btnRegresar){
+        escenarioPrincipal.menuPrincipalView();
+        }if(event.getSource()==btnMenuClientes){
+            escenarioPrincipal.menuClientessView();
+        }if(event.getSource() == btnProgramador){
+            escenarioPrincipal.programadorView(); 
+        }if(event.getSource() == btnProductos){
+            escenarioPrincipal.menuTipoProductoView();   
+        }if(event.getSource() == btnProveedor){
+            escenarioPrincipal.menuProveedorView();         
+        }if(event.getSource() == btnCompras){
+            escenarioPrincipal.menuComprasView();
+        }if(event.getSource() == btnCargoEmpleado){
+            escenarioPrincipal.menuCargoEmpleadoView();    
+        }if(event.getSource() == btnFecha){
+            escenarioPrincipal.datePickerView();        
+        }if(event.getSource() == btnProducto){
+            escenarioPrincipal.menuProductoView();
+        }if(event.getSource() == btnEmpleado){
+            escenarioPrincipal.menuEmpleadoView();
+        }if(event.getSource() == btnFactura){
+            escenarioPrincipal.menuFacturaView();   
+        }if(event.getSource() == btnDetalleFactura){
+            escenarioPrincipal.menuDetalleFacturaView();         
+        }if(event.getSource() == btnDetalleCompra){
+            escenarioPrincipal.menuDetalleCompraView();   
+        }if(event.getSource() == btnEmailProveedor)
+            escenarioPrincipal.menuEmailProveedorView();  
     }
     
           public Principal getEscenarioPrincipal() {

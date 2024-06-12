@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="841.0" prefWidth="1507.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.luislopez.controller.MenuAdministracionController">
+   <children>
+      <ImageView fitHeight="857.0" fitWidth="1507.0" layoutX="-6.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../imagenes/Fondo3M.png" />
+         </image>
+      </ImageView>
+      <VBox layoutY="213.0" prefHeight="634.0" prefWidth="289.0">
+         <children>
+            <Button fx:id="btnRegresar" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="289.0" stylesheets="@../resource/KinalExpressCSS.css" text="Administracion  Inicio           " textFill="WHITE">
+               <styleClass>
+                  <String fx:value="button1" />
+                  <String fx:value="Button4" />
+               </styleClass>
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnMenuClientes" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="289.0" stylesheets="@../resource/KinalExpressCSS.css" text="Clientes de Empresa              " textFill="WHITE">
+               <styleClass>
+                  <String fx:value="button1" />
+                  <String fx:value="Button4" />
+               </styleClass>
+               <font>
+                  <Font name="Arial" size="19.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnCargoEmpleado" layoutX="10.0" layoutY="55.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="289.0" stylesheets="@../resource/KinalExpressCSS.css" text="Cargos de Empledos               " textFill="WHITE">
+               <styleClass>
+                  <String fx:value="button1" />
+                  <String fx:value="Button4" />
+               </styleClass>
+               <font>
+                  <Font name="Arial" size="19.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnEmpleado" layoutX="10.0" layoutY="100.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="289.0" stylesheets="@../resource/KinalExpressCSS.css" text="Empleados de Empresa         " textFill="WHITE">
+               <styleClass>
+                  <String fx:value="button1" />
+                  <String fx:value="Button4" />
+               </styleClass>
+               <font>
+                  <Font name="Arial" size="19.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnProductos" layoutX="10.0" layoutY="145.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="289.0" stylesheets="@../resource/KinalExpressCSS.css" text="Tipo Producto Empresa          " textFill="WHITE">
+               <styleClass>
+                  <String fx:value="button1" />
+                  <String fx:value="Button4" />
+               </styleClass>
+               <font>
+                  <Font name="Arial" size="19.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnProveedor" layoutX="10.0" layoutY="190.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="289.0" stylesheets="@../resource/KinalExpressCSS.css" text="Proveedores de Empresa       " textFill="WHITE">
+               <styleClass>
+                  <String fx:value="button1" />
+                  <String fx:value="Button4" />
+               </styleClass>
+               <font>
+                  <Font name="Arial" size="19.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnEmailProveedor" layoutX="10.0" layoutY="235.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="289.0" stylesheets="@../resource/KinalExpressCSS.css" text="Email de Proveedores             " textFill="WHITE">
+               <styleClass>
+                  <String fx:value="button1" />
+                  <String fx:value="Button4" />
+               </styleClass>
+               <font>
+                  <Font name="Arial" size="19.0" />
+               </font>
+            </Button>
+            <Button layoutX="10.0" layoutY="280.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="289.0" stylesheets="@../resource/KinalExpressCSS.css" text="Telefonos de Proveedores      " textFill="WHITE">
+               <styleClass>
+                  <String fx:value="button1" />
+                  <String fx:value="Button4" />
+               </styleClass>
+               <font>
+                  <Font name="Arial" size="19.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnCompras" layoutX="10.0" layoutY="325.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="289.0" stylesheets="@../resource/KinalExpressCSS.css" text="Compas en la Empresa           " textFill="WHITE">
+               <styleClass>
+                  <String fx:value="button1" />
+                  <String fx:value="Button4" />
+               </styleClass>
+               <font>
+                  <Font name="Arial" size="19.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnProducto" layoutX="10.0" layoutY="370.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="289.0" stylesheets="@../resource/KinalExpressCSS.css" text="Productos de la Empresa        " textFill="WHITE">
+               <styleClass>
+                  <String fx:value="button1" />
+                  <String fx:value="Button4" />
+               </styleClass>
+               <font>
+                  <Font name="Arial" size="19.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnDetalleCompra" layoutX="10.0" layoutY="415.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="289.0" stylesheets="@../resource/KinalExpressCSS.css" text="Detalle Compra de Empresa   " textFill="WHITE">
+               <styleClass>
+                  <String fx:value="button1" />
+                  <String fx:value="Button4" />
+               </styleClass>
+               <font>
+                  <Font name="Arial" size="19.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnDetalleFactura" layoutX="10.0" layoutY="460.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="289.0" stylesheets="@../resource/KinalExpressCSS.css" text="Detalle Factura de Empresa    " textFill="WHITE">
+               <styleClass>
+                  <String fx:value="button1" />
+                  <String fx:value="Button4" />
+               </styleClass>
+               <font>
+                  <Font name="Arial" size="19.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnFactura" layoutX="10.0" layoutY="143.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="289.0" stylesheets="@../resource/KinalExpressCSS.css" text="Factura de Empresa                 " textFill="WHITE">
+               <styleClass>
+                  <String fx:value="button1" />
+                  <String fx:value="Button4" />
+               </styleClass>
+               <font>
+                  <Font name="Arial" size="19.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+      <ImageView fitHeight="207.0" fitWidth="213.0" layoutX="41.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../imagenes/eso%20(1).png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="815.0" fitWidth="1219.0" layoutX="289.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../imagenes/Administracion.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

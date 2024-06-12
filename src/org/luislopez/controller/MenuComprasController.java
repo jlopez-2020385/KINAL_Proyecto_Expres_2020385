@@ -5,9 +5,12 @@
  */
 package org.luislopez.controller;
 
+import static java.lang.Double.parseDouble;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -16,6 +19,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -42,12 +46,25 @@ public class MenuComprasController implements Initializable {
     }
     private operaciones tipoDeoperaciones = operaciones.NINGUNO;
 
-    @FXML
-    private Button btnRegresar;
+        @FXML private Button btnRegresar;
+        @FXML private Button btnMenuClientes;
+        @FXML private Button btnProgramador; 
+        @FXML private Button btnProductos;
+        @FXML private Button btnProveedor;
+        @FXML private Button btnCompras;    
+        @FXML private Button btnCargoEmpleado;   
+        @FXML private Button btnProducto;    
+        @FXML private Button btnEmpleado;     
+        @FXML private Button btnFactura;    
+        @FXML private Button btnDetalleFactura;    
+        @FXML private Button btnDetalleCompra;    
+        @FXML private Button btnFecha;    
+        @FXML private Button btnEmailProveedor;     
+    
     @FXML
     private TextField txtNumeroC;
     @FXML
-    private TextField txtFechaC;
+    private DatePicker txtFechaC;
     @FXML
     private TextField txtDescripcionC;
     @FXML
@@ -98,7 +115,7 @@ public class MenuComprasController implements Initializable {
     
     public void selecionarElementos() {
         txtNumeroC.setText(String.valueOf(((Compras) tblCompras.getSelectionModel().getSelectedItem()).getNumeroDocumento()));
-        txtFechaC.setText((((Compras) tblCompras.getSelectionModel().getSelectedItem()).getFechaDocumento()));
+        txtFechaC.setValue(LocalDate.parse(((Compras) tblCompras.getSelectionModel().getSelectedItem()).getFechaDocumento()));
         txtDescripcionC.setText((((Compras) tblCompras.getSelectionModel().getSelectedItem()).getDescripcion()));
         txtTotalC.setText((((Compras) tblCompras.getSelectionModel().getSelectedItem()).getTotalDocumento()));
     }
@@ -166,14 +183,14 @@ public class MenuComprasController implements Initializable {
     
     public void guardar() {
         Compras registro = new Compras();
-        registro.setFechaDocumento(txtFechaC.getText());
+        registro.setFechaDocumento(txtFechaC.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         registro.setDescripcion(txtDescripcionC.getText());
-        registro.setTotalDocumento(txtTotalC.getText());        
         try {
-            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_AgregarCompras( ?, ?, ?)}");
+            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_AgregarCompras( ?, ?,?)}");
             procedimiento.setString(1, registro.getFechaDocumento());
             procedimiento.setString(2, registro.getDescripcion());
             procedimiento.setString(3, registro.getTotalDocumento());
+
             procedimiento.execute();
             listaCompras.add(registro);
 
@@ -259,25 +276,28 @@ public class MenuComprasController implements Initializable {
      * Método para actualizar 
      */    
     
+
+    
     public void actualizar(){
+        Compras registro = (Compras)tblCompras.getSelectionModel().getSelectedItem();
+        registro.setFechaDocumento(txtFechaC.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        registro.setDescripcion(txtDescripcionC.getText());
+        registro.setTotalDocumento((txtTotalC.getText()));
+
         try{
-            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_ActualizarCompras(?,?,?,?)}");
-            Compras registro=(Compras)tblCompras.getSelectionModel().getSelectedItem();
-            
-            registro.setFechaDocumento(txtFechaC.getText());
-            registro.setDescripcion(txtDescripcionC.getText());
-            registro.setTotalDocumento(txtTotalC.getText());    
+            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("{call sp_ActualizarCompras(?,?,?)}");
             procedimiento.setInt(1, registro.getNumeroDocumento());
             procedimiento.setString(2, registro.getFechaDocumento());
             procedimiento.setString(3, registro.getDescripcion());
-            procedimiento.setString(4, registro.getTotalDocumento());
-            procedimiento.execute();            
-            
+
+
+            procedimiento.execute();
+             listaCompras.add(registro);
         }catch(Exception e){
             e.printStackTrace();
         }
-        
-    }
+    }    
+    
     
     public void reportes(){
         switch(tipoDeoperaciones){
@@ -300,7 +320,7 @@ public class MenuComprasController implements Initializable {
     
     
     public void desactivarControles() {
-        txtNumeroC.setEditable(true);
+        txtNumeroC.setEditable(false);
         txtFechaC.setEditable(false);
         txtDescripcionC.setEditable(false);
         txtTotalC.setEditable(false);
@@ -317,7 +337,7 @@ public class MenuComprasController implements Initializable {
 
     public void limpiarControlers() {
         txtNumeroC.clear();
-        txtFechaC.clear();
+        txtFechaC.setValue(null);
         txtDescripcionC.clear();
         txtTotalC.clear();
 
@@ -325,9 +345,34 @@ public class MenuComprasController implements Initializable {
 
     @FXML
     public void handleButtonAction(ActionEvent event) {
-        if (event.getSource() == btnRegresar) {
-            escenarioPrincipal.menuPrincipalView();
-        }
+        if (event.getSource() == btnRegresar){
+        escenarioPrincipal.menuPrincipalView();
+        }if(event.getSource()==btnMenuClientes){
+            escenarioPrincipal.menuClientessView();
+        }if(event.getSource() == btnProgramador){
+            escenarioPrincipal.programadorView(); 
+        }if(event.getSource() == btnProductos){
+            escenarioPrincipal.menuTipoProductoView();   
+        }if(event.getSource() == btnProveedor){
+            escenarioPrincipal.menuProveedorView();         
+        }if(event.getSource() == btnCompras){
+            escenarioPrincipal.menuComprasView();
+        }if(event.getSource() == btnCargoEmpleado){
+            escenarioPrincipal.menuCargoEmpleadoView();    
+        }if(event.getSource() == btnFecha){
+            escenarioPrincipal.datePickerView();        
+        }if(event.getSource() == btnProducto){
+            escenarioPrincipal.menuProductoView();
+        }if(event.getSource() == btnEmpleado){
+            escenarioPrincipal.menuEmpleadoView();
+        }if(event.getSource() == btnFactura){
+            escenarioPrincipal.menuFacturaView();   
+        }if(event.getSource() == btnDetalleFactura){
+            escenarioPrincipal.menuDetalleFacturaView();         
+        }if(event.getSource() == btnDetalleCompra){
+            escenarioPrincipal.menuDetalleCompraView();   
+        }if(event.getSource() == btnEmailProveedor)
+            escenarioPrincipal.menuEmailProveedorView();   
     }
 
     public void setEscenarioPrincipal(Principal escenarioPrincipal) {
