@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,6 +32,7 @@ import org.luislopez.bean.Compras;
 import org.luislopez.bean.Empleado;
 import org.luislopez.bean.Factura;
 import org.luislopez.db.Conexion;
+import org.luislopez.report.GenerarReportes;
 import org.luislopez.system.Principal;
 
 /**
@@ -387,6 +390,10 @@ public class MenuFacturaController implements Initializable {
      
     public void reportes(){
         switch(tipoDeOperacion){
+            case NINGUNO :
+                imprimirReporte();
+                break;
+                
             case ACTUALIZAR:
                 desactivarControles();
                 limpiarControles();                
@@ -400,6 +407,16 @@ public class MenuFacturaController implements Initializable {
                 break;  
         }
     }         
+    
+    
+    public void imprimirReporte(){
+        Map parametros = new HashMap();
+        int factID= Integer.valueOf(((Factura)tblFactura.getSelectionModel().getSelectedItem()).getNumeroDeFactura());
+        parametros.put("factID",factID);
+        GenerarReportes.mostrarReportes("ReporteriaFactura.jasper", "Reporte de Factura", parametros);
+        
+    }
+             
     
     public void desactivarControles(){
         txtNumeroDeFactura.setEditable(false);

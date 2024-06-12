@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteriaProveedores" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3a014469-3f26-40a7-a9cc-969201b71cd4">
-	<property name="ireport.zoom" value="1.9487171000000045"/>
-	<property name="ireport.x" value="302"/>
+	<property name="ireport.zoom" value="1.3310000000000028"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
 		<![CDATA[call sp_MostrarProveedores]]>
@@ -39,7 +39,11 @@
 		</band>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch"/>
+		<band height="79" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="152" height="79" forecolor="#FFFFFF" uuid="b75edf46-8ee4-4a68-a1d6-7d98ed9ccc2e"/>
+			</rectangle>
+		</band>
 	</title>
 	<pageHeader>
 		<band height="35" splitType="Stretch"/>

@@ -1103,6 +1103,21 @@ select * from Clientes;
 
 
 
+-- ID FACTURA , CANTIDAD , TOTAL , FECHA  FACTURAS
+-- NOMBRE, NIT, APELLIDO , TELEFONO, CLIENTES
+-- PRODUCTOS PRECIOUNITARIO,DESCRIPCION
+-- DETALLEFACTURA CANTIDAD, PRECIO UNITARIO
+
+
+
+
+select*from DetalleFactura
+	join Factura on DetalleFactura.numeroDeFactura= Factura.numeroDeFactura
+    join Clientes on Factura.clienteID =Clientes.clienteID
+    join Productos on DetalleFactura.codigoProducto =Productos.codigoProducto
+    where Factura.numeroDeFactura= 1;
+
+
 
 
 

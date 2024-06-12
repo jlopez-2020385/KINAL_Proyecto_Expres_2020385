@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteKinalExpress" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a09ce284-7b24-4f1a-9fda-54f4ee3d361c">
-	<property name="ireport.zoom" value="0.7513148009015842"/>
+	<property name="ireport.zoom" value="1.6105100000000148"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="452"/>
+	<property name="ireport.y" value="234"/>
 	<queryString>
 		<![CDATA[call sp_MostrarClientes]]>
 	</queryString>
@@ -36,7 +36,11 @@
 		</band>
 	</background>
 	<title>
-		<band height="90" splitType="Stretch"/>
+		<band height="90" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="131" height="90" forecolor="#FFFFFF" uuid="fa85cb67-78cb-4350-84fc-c2fd5dfea471"/>
+			</rectangle>
+		</band>
 	</title>
 	<pageHeader>
 		<band height="90" splitType="Stretch"/>
@@ -62,12 +66,6 @@
 				<reportElement x="30" y="13" width="87" height="20" forecolor="#FFFFFF" uuid="46d325a8-e26b-440b-a21a-3361cef16408"/>
 				<text><![CDATA[   NIT ]]></text>
 			</staticText>
-			<line>
-				<reportElement x="10" y="2" width="510" height="1" forecolor="#000000" uuid="693761a1-5012-44aa-be3c-11d41c00f2ab"/>
-				<graphicElement>
-					<pen lineWidth="1.5"/>
-				</graphicElement>
-			</line>
 			<staticText>
 				<reportElement x="304" y="13" width="94" height="20" forecolor="#FFFFFF" uuid="3b64dbdb-d0f3-424e-9ac7-c48f95d00866"/>
 				<text><![CDATA[      Telefono  ]]></text>
@@ -76,12 +74,6 @@
 	</columnHeader>
 	<detail>
 		<band height="54" splitType="Stretch">
-			<line>
-				<reportElement x="10" y="0" width="510" height="1" forecolor="#000000" uuid="44a75201-3fcd-4894-8641-2f980f925389"/>
-				<graphicElement>
-					<pen lineWidth="1.5"/>
-				</graphicElement>
-			</line>
 			<textField>
 				<reportElement x="117" y="11" width="87" height="20" forecolor="#000000" uuid="1d55f8ff-1f71-496d-8baf-5788ffc9827d"/>
 				<textFieldExpression><![CDATA[$F{nombreClientes}]]></textFieldExpression>
@@ -102,6 +94,9 @@
 				<reportElement x="304" y="11" width="94" height="20" forecolor="#000000" uuid="04a19dba-cb8e-4fa2-a998-e9b569c8c5ad"/>
 				<textFieldExpression><![CDATA[$F{telefonoClientes}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement x="10" y="42" width="510" height="1" uuid="2f689d7f-f98f-46f0-b18d-50fa489678f7"/>
+			</line>
 		</band>
 	</detail>
 	<columnFooter>

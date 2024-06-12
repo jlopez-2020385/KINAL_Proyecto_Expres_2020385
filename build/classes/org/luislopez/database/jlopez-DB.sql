@@ -616,6 +616,26 @@ begin
 end $$
 delimiter ;
 
+
+CREATE VIEW vw_listarRelaciones AS
+SELECT
+    Productos.codigoProducto AS codigoProducto,
+    Productos.descripcionProducto AS Descripcion,
+    Productos.precioUnitario AS precioUnitario,
+    Productos.precioDocena AS precioDocena,
+    Productos.precioMayor AS precioMayor,
+    Productos.existencia AS existencia,
+    TipoProducto.descripcionProducto AS codigoTipoProducto,
+    Proveedores.nombresProveedor AS codigoProveedor
+FROM Productos
+INNER JOIN TipoProducto ON Productos.codigoTipoProducto = TipoProducto.codigoTipoProducto
+INNER JOIN Proveedores ON Productos.codigoProveedor = Proveedores.codigoProveedor;
+
+select*from vw_listarRelaciones;
+
+
+
+
 -- ------------------------------------------------------------------------------- DetalleCompra --------------------------------------------------------------------------------------------------------
 -- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -1081,6 +1101,21 @@ Alter user 'root'@'localhost' identified with mysql_native_password by 'ema22';
 
 select * from Clientes;
 
+
+
+-- ID FACTURA , CANTIDAD , TOTAL , FECHA  FACTURAS
+-- NOMBRE, NIT, APELLIDO , TELEFONO, CLIENTES
+-- PRODUCTOS PRECIOUNITARIO,DESCRIPCION
+-- DETALLEFACTURA CANTIDAD, PRECIO UNITARIO
+
+
+
+
+select*from DetalleFactura
+	join Factura on DetalleFactura.numeroDeFactura= Factura.numeroDeFactura
+    join Clientes on Factura.clienteID =Clientes.clienteID
+    join Productos on DetalleFactura.codigoProducto =Productos.codigoProducto
+    where Factura.numeroDeFactura= 1;
 
 
 
