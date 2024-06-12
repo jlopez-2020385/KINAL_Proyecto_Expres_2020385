@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteKinalExpress" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a09ce284-7b24-4f1a-9fda-54f4ee3d361c">
 	<property name="ireport.zoom" value="1.6105100000000148"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="234"/>
+	<property name="ireport.y" value="0"/>
 	<queryString>
 		<![CDATA[call sp_MostrarClientes]]>
 	</queryString>
@@ -43,7 +43,15 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="90" splitType="Stretch"/>
+		<band height="90" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="26" width="266" height="53" uuid="c8118ddf-07fd-495b-8a4a-1df9d8be3438"/>
+				<textElement>
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Clientes]]></text>
+			</staticText>
+		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="34" splitType="Stretch">

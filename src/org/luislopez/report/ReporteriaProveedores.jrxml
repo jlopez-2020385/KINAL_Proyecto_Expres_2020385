@@ -43,6 +43,13 @@
 			<rectangle>
 				<reportElement x="0" y="0" width="152" height="79" forecolor="#FFFFFF" uuid="b75edf46-8ee4-4a68-a1d6-7d98ed9ccc2e"/>
 			</rectangle>
+			<staticText>
+				<reportElement x="55" y="44" width="201" height="35" uuid="e5900153-9ac8-43d6-869f-6d34143de973"/>
+				<textElement>
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Proveedores]]></text>
+			</staticText>
 		</band>
 	</title>
 	<pageHeader>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteriaFactura" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="04f88221-0142-4632-becf-37ee9bc390c5">
-	<property name="ireport.zoom" value="1.100000000000001"/>
+	<property name="ireport.zoom" value="1.6105100000000032"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="factID" class="java.lang.Integer">
@@ -332,6 +332,10 @@
 	</detail>
 	<columnFooter>
 		<band height="127" splitType="Stretch">
+			<image>
+				<reportElement x="110" y="0" width="170" height="124" uuid="2ed31390-7791-4860-9c4e-ae83420eccf5"/>
+				<imageExpression><![CDATA["C:\\Users\\HP\\Documents\\NetBeansProjects\\KinalExpress\\src\\org\\luislopez\\imagenes\\Firma.jpg"]]></imageExpression>
+			</image>
 			<rectangle>
 				<reportElement x="586" y="51" width="201" height="20" uuid="687d042f-c5cc-4569-96a8-6567c51794e0"/>
 			</rectangle>
@@ -354,10 +358,10 @@
 				<textFieldExpression><![CDATA["TOTAL: " + "Q." + $V{TOTAL}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="86" y="93" width="229" height="1" uuid="70afdab4-0fcc-41c4-a5fb-1c4dbc184d0d"/>
+				<reportElement x="86" y="82" width="229" height="1" uuid="70afdab4-0fcc-41c4-a5fb-1c4dbc184d0d"/>
 			</line>
 			<staticText>
-				<reportElement x="86" y="94" width="229" height="20" uuid="77db479f-6b96-4bd1-8a4f-00023d571bba"/>
+				<reportElement x="100" y="107" width="190" height="20" uuid="77db479f-6b96-4bd1-8a4f-00023d571bba"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[Firma o Sello de Compra]]></text>
 			</staticText>

@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteriaFactura" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="04f88221-0142-4632-becf-37ee9bc390c5">
 	<property name="ireport.zoom" value="1.6105100000000032"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="475"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="factID" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -107,7 +107,7 @@
 				<textFieldExpression><![CDATA["FACTURA NO: " + $F{numeroDeFactura}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="290" y="76" width="341" height="20" uuid="c8ec2d36-db1b-4dc3-a407-3e212e02135d"/>
+				<reportElement x="290" y="76" width="331" height="20" uuid="c8ec2d36-db1b-4dc3-a407-3e212e02135d"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
